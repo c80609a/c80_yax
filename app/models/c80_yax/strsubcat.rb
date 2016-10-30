@@ -2,6 +2,11 @@ require "babosa"
 
 class C80Yax::Strsubcat < ActiveRecord::Base
 
+  validates :title,
+            presence: true,
+            uniqueness: true,
+            length: { in: 6..50 }
+
   has_many :subordinates,
            class_name: 'C80Yax::Strsubcat',
            foreign_key: 'parent_id'
