@@ -1,0 +1,19 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          core_item: 'Каталог'
+          strsubcat: 'Категории'
+  activerecord:
+    models:
+      strsubcat:
+        one: "категорию"
+        other: "Категории"
+    attributes:
+      c80_yax/strsubcat:
+        id: "id"
+        ord: 'Порядковый №'
+        title: "Название"
+        created_at: "Дата создания"
+        updated_at: "Обновлено"
+        subordinates: "Принадлежит категории"
