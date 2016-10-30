@@ -24,4 +24,18 @@ class C80Yax::Strsubcat < ActiveRecord::Base
 
   scope :menu_order, -> {order(:ord => :asc)}
 
+  # ------------------------------------------------------------------------------------------------------------------------
+
+  ransacker :parent_id,
+            formatter: proc { |v|
+              # Rails.logger.debug "[TRACE] <v> #{v}"
+              results = C80Yax::Strsubcat
+                            .where(:parent_id => v)
+                            .map(&:id)
+              # Rails.logger.debug "[TRACE] <results> #{results}"
+              results = results.present? ? results : nil
+            }, splat_params: true do |parent|
+    parent.table[:id]
+  end
+
 end

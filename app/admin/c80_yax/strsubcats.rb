@@ -23,7 +23,16 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
   # before_filter :skip_sidebar!, :only => :index
 
   filter :title
-  filter :parent
+  filter :parent_id_in,
+         :as => :select,
+         :collection => -> { C80Yax::Strsubcat.all.map { |s| [s.title,s.id] }},
+         :input_html => {
+             :class => 'selectpicker',
+             :data => {
+                 :size => 10,
+                 :width => '100%'
+             }
+         }
 
   # controller do
   #   cache_sweeper :suit_sweeper, :only => [:update,:create,:destroy]
