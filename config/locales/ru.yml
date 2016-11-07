@@ -4,20 +4,38 @@ ru:
         menu:
           core_item: 'Каталог'
           strsubcat: 'Категории'
+          item: 'Товары'
   activerecord:
     models:
       strsubcat:
-        one: "категорию"
-        other: "Категории"
+        one: 'категорию'
+        other: 'Категории'
+      item:
+        one: 'товар'
+        other: 'Товары'
     attributes:
       c80_yax/strsubcat:
-        id: "id"
+        id: 'id'
         ord: 'Порядковый №'
-        title: "Название"
-        created_at: "Дата создания"
-        updated_at: "Обновлено"
-        parent: "Принадлежит категории"
-        parent_id_in: "Принадлежит категории"
+        title: 'Название'
+        created_at: 'Дата создания'
+        updated_at: 'Обновлено'
+        parent: 'Принадлежит категории'
+        parent_id_in: 'Принадлежит категории'
+      c80_yax/item:
+        id: 'id'
+        title: 'Название'
+        short_desc: 'Краткое описание'
+        full_desc: 'Подробное описание'
+        is_hit: 'Хит'
+        is_sale: 'Акция'
+        is_main: 'Выводить на главной'
+        is_gift: 'Подарочный набор'
+        is_starting: 'Стартовый набор'
+        is_available: 'В наличии'
+        strsubcat: 'Категория'
+        related_parent: 'related_parent'
+        related_childs: 'related_childs'
     errors:
       models:
         c80_yax/strsubcat:

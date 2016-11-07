@@ -60,6 +60,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
               :as => :select,
               :collection => C80Yax::Strsubcat.all.map { |s| [s.title,s.id] },
               :input_html => {
+                  :title => '',
                   :class => 'selectpicker',
                   :data => {
                       :size => 10

@@ -3,7 +3,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
 
   menu :label => proc{ I18n.t('c80_yax.active_admin.menu.strsubcat')},
        :parent => 'x_c80_yax',
-       :priority => 2
+       :priority => 1
 
   permit_params :title,
                 :slug,
@@ -28,6 +28,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
          :collection => -> { C80Yax::Strsubcat.all.map { |s| [s.title,s.id] }},
          :input_html => {
              :class => 'selectpicker',
+             :title => '',
              :data => {
                  :size => 10,
                  :width => '100%'
@@ -68,6 +69,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
               :collection => C80Yax::Strsubcat.where.not(id:f.object.id).map { |s| ["#{s.title}", s.id]},
               :input_html => {
                   :class => 'selectpicker',
+                  :title => ' ',
                   :data => {
                       :size => '10',
                       :width => '400px'
