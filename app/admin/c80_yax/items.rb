@@ -1,7 +1,7 @@
 # категории строительных материалов
 ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
-  menu :label => proc{ I18n.t('c80_yax.active_admin.menu.item')},
+  menu :label => proc { I18n.t('c80_yax.active_admin.menu.item') },
        :parent => 'x_c80_yax',
        :priority => 2
 
@@ -15,11 +15,12 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :is_gift,
                 :is_starting,
                 :is_available,
-                :strsubcat_id#,
+                :strsubcat_id,
+                :iphotos_attributes => [:id, :image, :_destroy]#,
                 # :item_props_attributes => [:value, :_destroy, :prop_name_id, :id],
-                # :vendor_ids => [],
-                # :gallery_ids => [],
-                # :related_child_ids => []
+  # :vendor_ids => [],
+  # :gallery_ids => [],
+  # :related_child_ids => []
 
   config.sort_order = 'id_asc'
 
@@ -34,11 +35,23 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
   index do
     selectable_column
     id_column
-
+    
+    column :iphotos do |item|
+      r = ''
+      if item.iphotos.count > 0
+        r = link_to image_tag(item.iphotos.first.image.thumb_md,
+                              style: 'width:150px'),
+                    item.iphotos.first.image.url,
+                    target: '_blank'
+        r = "#{r}<br>Всего фотографий: #{item.iphotos.count}".html_safe
+      end
+      r
+    end
+    
     column :title
-    # column :is_hit
-    # column :is_sale
-    # column :is_main
+    column :is_hit
+    column :is_sale
+    column :is_main
     # column :is_ask_price
 
     # column 'Бренд' do |itm|
@@ -58,7 +71,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       f.input :title
       f.input :strsubcat,
               :as => :select,
-              :collection => C80Yax::Strsubcat.all.map { |s| [s.title,s.id] },
+              :collection => C80Yax::Strsubcat.all.map { |s| [s.title, s.id] },
               :input_html => {
                   :title => '',
                   :class => 'selectpicker',
@@ -75,20 +88,21 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       f.input :is_available
 
       f.input :short_desc, :input_html => {:style => 'height:80px'}
+
+      f.has_many :iphotos, :allow_destroy => true do |iph|
+        iph.input :image,
+                 :as => :file,
+                 :hint => image_tag(iph.object.image.thumb_md)
+      end
+
       f.input :full_desc, :as => :ckeditor, :input_html => {:style => 'height:500px', rows: 20}
       # f.input :vendors, :as => :select, :input_html => {:multiple => false}, :include_blank => true
 
-      # f.input :image,
-      #          :as => :file,
-      #          :hint => image_tag(f.object.image.thumb_fit)
+
     end
 
     # f.inputs "Характеристики" do
     #
-    #   f.has_many :item_props, :allow_destroy => true do |item_prop|
-    #       item_prop.input :prop_name
-    #       item_prop.input :value
-    #   end
     #
     # end
 

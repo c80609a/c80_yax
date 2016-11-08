@@ -13,6 +13,13 @@ class C80Yax::Item < ActiveRecord::Base
   # has_and_belongs_to_many :vendors
   belongs_to :strsubcat
 
+  has_many :iphotos, :dependent => :destroy
+  accepts_nested_attributes_for :iphotos,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true  
+  
 =begin
   has_many :item_props, :dependent => :destroy
   accepts_nested_attributes_for :item_props,
