@@ -1,4 +1,4 @@
-require "babosa"
+require 'babosa'
 
 class C80Yax::Strsubcat < ActiveRecord::Base
 
@@ -14,7 +14,32 @@ class C80Yax::Strsubcat < ActiveRecord::Base
   belongs_to :parent,
              class_name: 'C80Yax::Strsubcat'
 
-  # has_many :items, :dependent => :destroy
+  # has_and_belongs_to_many :prop_names#,
+                          #:after_add => :after_add_prop_names,
+                          #:after_remove => :after_remove_prop_names
+
+  has_many :items, :dependent => :destroy
+
+  # has_many :main_props, :dependent => :destroy
+  # accepts_nested_attributes_for :main_props,
+  #                               :reject_if => lambda { |attributes|
+  #                                 !attributes.present?
+  #                               },
+  #                               :allow_destroy => true
+  #
+  # has_many :price_props, :dependent => :destroy
+  # accepts_nested_attributes_for :price_props,
+  #                               :reject_if => lambda { |attributes|
+  #                                 !attributes.present?
+  #                               },
+  #                               :allow_destroy => true
+  #
+  # has_many :common_props, :dependent => :destroy
+  # accepts_nested_attributes_for :common_props,
+  #                               :reject_if => lambda { |attributes|
+  #                                 !attributes.present?
+  #                               },
+  #                               :allow_destroy => true
 
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged
