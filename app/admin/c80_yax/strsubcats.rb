@@ -8,8 +8,8 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
   permit_params :title,
                 :slug,
                 :ord,
-                :parent_id
-                # :prop_name_ids => [],
+                :parent_id,
+                :prop_name_ids => []#,
                 # :main_props_attributes => [:id, :_destroy, :prop_name_ids => []],
                 # :common_props_attributes => [:id, :_destroy, :prop_name_ids => []],
                 # :price_props_attributes => [:id, :_destroy, :prop_name_ids => []]
@@ -23,17 +23,17 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
   # before_filter :skip_sidebar!, :only => :index
 
   filter :title
-  filter :parent_id_in,
-         :as => :select,
-         :collection => -> { C80Yax::Strsubcat.all.map { |s| [s.title,s.id] }},
-         :input_html => {
-             :class => 'selectpicker',
-             :title => '',
-             :data => {
-                 :size => 10,
-                 :width => '100%'
-             }
-         }
+  # filter :parent_id_in,
+  #        :as => :select,
+  #        :collection => -> { C80Yax::Strsubcat.all.map { |s| [s.title,s.id] }},
+  #        :input_html => {
+  #            :class => 'selectpicker',
+  #            :title => '',
+  #            :data => {
+  #                :size => 10,
+  #                :width => '100%'
+  #            }
+  #        }
 
   # controller do
   #   cache_sweeper :suit_sweeper, :only => [:update,:create,:destroy]
@@ -46,7 +46,18 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
       editable_text_column str_sub_cat, :ord
     end
     column :title
-    column :parent
+    # column :parent
+
+    column :prop_names do |strsubcat|
+      res = '-'
+      if strsubcat.prop_names.count > 0
+        res = ''
+        strsubcat.prop_names.map do |prop_name|
+          res += "• #{prop_name.title}<br>"
+        end
+      end
+      res.html_safe
+    end
 
     # column :strcats do |str_sub_cat|
     #   str = '-'
@@ -61,7 +72,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
 
   form(:html => {:multipart => true}) do |f|
 
-    f.inputs "Свойства подкатегории" do
+    f.inputs 'Свойства подкатегории' do
       f.input :title
       f.input :ord
       f.input :parent,
@@ -79,9 +90,9 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
               :include_blank => true
     end
 
-    # f.inputs "Характеристики, которыми описываются товары из этой подкатегории", :class => 'collapsed' do
-    #   f.input :prop_names, :as => :check_boxes
-    # end
+    f.inputs 'Характеристики, которыми описываются товары из этой подкатегории', :class => 'collapsed' do
+      f.input :prop_names, :as => :check_boxes
+    end
 
     # f.inputs "Характеристки, которые выводятся на странице просмотра товара справа от картинки (<a class='poiasn' href='#{image_url('samples/2015_11_22_item_main_props.jpg')}' target='_blank'>например</a>)", :class => 'collapsed-bug fieldset_main_props' do
     #   f.has_many :main_props, allow_destroy: true do |main_prop|
