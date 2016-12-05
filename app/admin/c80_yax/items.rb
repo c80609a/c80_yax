@@ -16,8 +16,8 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :is_starting,
                 :is_available,
                 :strsubcat_id,
-                :iphotos_attributes => [:id, :image, :_destroy]#,
-                # :item_props_attributes => [:value, :_destroy, :prop_name_id, :id],
+                :iphotos_attributes => [:id, :image, :_destroy],
+                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id]#,
   # :vendor_ids => [],
   # :gallery_ids => [],
   # :related_child_ids => []
@@ -67,7 +67,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
   form(:html => {:multipart => true}) do |f|
 
-    f.inputs "Свойства" do
+    f.inputs 'Свойства' do
       f.input :title
       f.input :strsubcat,
               :as => :select,
@@ -101,10 +101,14 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
     end
 
-    # f.inputs "Характеристики" do
-    #
-    #
-    # end
+    f.inputs 'Характеристики' do
+
+      f.has_many :item_props, :allow_destroy => true do |item_prop|
+        item_prop.input :prop_name
+        item_prop.input :value
+      end
+
+    end
 
     # f.inputs "Укажите товары, которые будут выводиться в блоке 'Похожие товары'", :class => 'collapsed' do
     #   f.input :related_childs,
