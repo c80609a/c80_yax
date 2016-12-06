@@ -1,0 +1,22 @@
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+.my-dialog {
+  height: 50px !important;
+  p {
+    padding: 5px 10px 3px;
+    font-size: 15px;
+    color: #ac0000;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+body.admin_items.edit {
+  .ui-dialog .ui-dialog-buttonpane button:last-child {
+    display: block;
+    margin: 0 auto;
+  }
+
+}

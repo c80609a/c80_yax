@@ -5,7 +5,7 @@ class C80Yax::Item < ActiveRecord::Base
   validates :title,
             presence: true,
             uniqueness: true,
-            length: { in: 6..150 }
+            length: { in: 2..150 }
 
   validates :strsubcat,
             presence: true
@@ -141,8 +141,8 @@ class C80Yax::Item < ActiveRecord::Base
   private
 
   def before_save_format_desc
-    if self.desc.present?
-      v = self.desc
+    if self.full_desc.present?
+      v = self.full_desc
 
       # удаляем inline css стили
       v = v.gsub(/ style=["'][^"']+["']/, '')
@@ -161,7 +161,7 @@ class C80Yax::Item < ActiveRecord::Base
 
       v = v.gsub('&nbsp;', ' ')
 
-      self.desc = v
+      self.full_desc = v
     end
 
   end
