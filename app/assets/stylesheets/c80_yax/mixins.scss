@@ -1,0 +1,89 @@
+// тень
+@mixin shdw($val) {
+  -webkit-box-shadow: 0 0 7px 0 rgba(0, 0, 0, $val);
+  -moz-box-shadow: 0 0 7px 0 rgba(0, 0, 0, $val);
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, $val);
+  /* For IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=$val, Direction=135, Color='#000000')";
+  /* For IE 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=$val, Direction=135, Color='#000000');
+}
+
+@mixin clearfx() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// ссылка без подчёркивания и обводки
+//@mixin nounder {
+//  text-decoration: none !important;
+//  border: none !important;
+//  outline: none !important;
+//
+//  &:hover, &:active, &:focus {
+//    text-decoration: none !important;
+//    border: none !important;
+//    outline: none !important;
+//  }
+//}
+
+// анимированный переход цвета
+//@mixin transition_color($sec) {
+//  -webkit-transition: color $sec ease-out;
+//  -moz-transition: color $sec ease-out;
+//  -ms-transition: color $sec ease-out;
+//  -o-transition: color $sec ease-out;
+//  transition: color $sec ease-out;
+//}
+
+// анимированный переход цвета границы
+//@mixin transition_border_color($sec) {
+//  -webkit-transition: border-color $sec ease-in;
+//  -moz-transition: border-color $sec ease-in;
+//  -ms-transition: border-color $sec ease-in;
+//  -o-transition: border-color $sec ease-in;
+//  transition: border-color $sec ease-in;
+//}
+
+//@mixin transform_prop($prop_name,$sec) {
+//  -webkit-transition: $prop_name $sec ease-out;
+//  -moz-transition: $prop_name $sec ease-out;
+//  -ms-transition: $prop_name $sec ease-out;
+//  -o-transition: $prop_name $sec ease-out;
+//  transition: $prop_name $sec ease-out;
+//}
+
+// градиент сверху-вниз
+//@mixin bg_tobottom_gradient($from,$to) {
+//  background-image: linear-gradient(to bottom, $from, $to) !important;
+//  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+//  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$from', endColorstr='$to', GradientType=0);
+//}
+
+//@mixin transform_scale($scale,$time) {
+//  -webkit-transform: scale($scale);
+//  -moz-transform: scale($scale);
+//  -ms-transform: scale($scale);
+//  -o-transform: scale($scale);
+//  transform: scale($scale);
+//
+//  -webkit-transition: -webkit-transform $time ease-out;
+//  -moz-transition: -moz-transform $time ease-out;
+//  -ms-transition: -ms-transform $time ease-out;
+//  -o-transition: -o-transform $time ease-out;
+//  transition:   transform $time ease-out;
+//}
+
+//@mixin opacity($val) {
+//  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=$val)";
+//  filter: alpha(opacity=$val);
+//  -moz-opacity:$val;
+//  -khtml-opacity: $val;
+//  opacity: $val;
+//}

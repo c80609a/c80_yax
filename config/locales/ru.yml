@@ -13,6 +13,9 @@ ru:
       item:
         one: 'товар'
         other: 'Товары'
+#      iphoto:
+#        one: 'Фотоm'
+#        other: 'Фотоr'
     attributes:
       c80_yax/strsubcat:
         id: 'id'
@@ -36,6 +39,8 @@ ru:
         strsubcat: 'Категория'
         related_parent: 'related_parent'
         related_childs: 'related_childs'
+        iphotos: 'Фото'
+#        iphoto: 'Фото'
     errors:
       models:
         c80_yax/strsubcat:

@@ -1,0 +1,152 @@
+//---[ товары ]---------------------------------------------------------------------------------------------------------
+
+body.admin_items {
+  &.edit, &.new, &.create { // create появляется только тогда, когда есть ошибка в создаваемом продукте
+
+    // здесь живут фото товара
+    li.iphotos.has_many_container {
+      @include clearfx;
+      padding-left: 20%;
+      margin-bottom: 15px;
+
+      h3 { display: none; }
+
+      // блок с фоткой, кнопкой "удалить", file-инпутом
+      fieldset.inputs.has_many_fields {
+        display: inline-block;
+        margin-right: 15px;
+        float: left;
+        position: relative;
+        background-color: transparent;
+        @include shdw(0.0);
+
+        ol {
+          li {
+
+            &.file {
+              padding-bottom: 0;
+            }
+
+            &.has_many_delete {
+              padding-top: 0;
+            }
+
+            label {
+              padding: 0;
+              &.label {
+                display: none;
+              }
+            }
+
+            input[type=file] {
+              width: 200px;
+              overflow: hidden;
+            }
+
+            p.inline-hints {
+              margin: 0 !important;
+            }
+
+          }
+        }
+      }
+
+      a.button.has_many_add {
+        clear: both;
+        float: left;
+        display: block;
+        position: relative;
+      }
+
+    }
+
+    // в этом контейнере живут fieldset-ы, каждый из которых соответствует одному свойству предмета
+    li.item_props.has_many_container {
+      padding-top: 0;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+
+      // прячем h3
+      h3 {
+        display: none;
+      }
+      // прячем сразу кнопку "Добавить Item prop"
+      a.has_many_add {
+        display: none;
+      }
+      // прячем кнопку "убрать свойство"
+      a.has_many_remove {
+        display: none;
+      }
+
+      // приводим в табличный вид внешний вид
+      fieldset.inputs.has_many_fields {
+        margin: 0;
+        padding-left: 20%;
+        @include shdw(0.0);
+        border: none;
+        border-radius: 0;
+
+        // прячем лейблы
+        label {
+          display: none;
+        }
+
+        li.select, li.input {
+          float: left;
+          padding: 3px;
+          clear: none !important;
+        }
+
+        /* Здесь живут PropNames: Объём, Цена... */
+        select {
+          text-align: right;
+          float: left;
+          width: 100%;
+
+          &:disabled {
+            color: #4C4C4C;
+          }
+        }
+
+        /* Здесь живут значения PropNames - пользователь может изменить их */
+        input {
+          float: left;
+          width: 400px !important;
+        }
+
+      }
+
+    }
+
+    /*стилизуем чекбоксы*/
+    form fieldset > ol > li.boolean {
+      height: auto;
+
+      &#item_is_main_input {
+      }
+
+      &#item_is_sale_input {
+      }
+
+      label {
+        font-weight: bold;
+        color: #5E6469;
+      }
+
+    }
+
+    /*p.inline-hints {
+      color: #74b1b2;
+      padding-left: 50px;
+    }*/
+
+    // спрячем артефакты: ненужные legend.label
+//    li#item_galleries_input {
+//      fieldset.choices {
+//        legend.label { display:none; }
+//      }
+//    }
+
+  }
+}
