@@ -411,5 +411,6 @@ var fEdit = function () {
 
 YOUR_APP.items = {
     edit: fEdit,
-    "new": jsinit.go
+    "new": jsinit.go//,
+    //create: jsinit.go
 };

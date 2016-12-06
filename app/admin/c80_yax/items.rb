@@ -87,8 +87,12 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       f.input :is_starting
       f.input :is_available
 
-      f.input :short_desc, :input_html => {:style => 'height:80px'}
+      f.input :short_desc, :input_html => {:style => 'height:80px', :maxlength => 250}
 
+      # Как поменять надпись на кнопке? Хочу убрать добавить Iphoto
+      # http://stackoverflow.com/questions/9266496/translate-rails-model-association-not-working
+      # http://stackoverflow.com/questions/8310997/configure-the-label-of-active-admin-has-many
+      # https://github.com/justinfrench/formtastic
       f.has_many :iphotos, :allow_destroy => true do |iph|
         iph.input :image,
                  :as => :file,
