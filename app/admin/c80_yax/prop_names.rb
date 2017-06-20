@@ -11,12 +11,16 @@ ActiveAdmin.register C80Yax::PropName, as: 'PropName' do
                 :is_normal_price,
                 :related_id
 
-  config.sort_order = 'title_asc'
+  config.sort_order = 'id_asc'
+  # config.clear_action_items!
+  config.batch_actions = false
 
-  filter :title
-  filter :strsubcats
-  filter :is_excluded_from_filtering
-  filter :is_normal_price
+  # filter :title
+  # filter :strsubcats
+  # filter :is_excluded_from_filtering
+  # filter :is_normal_price
+
+  before_filter :skip_sidebar!, :only => :index
 
   # controller do
   #   cache_sweeper :suit_sweeper, :only => [:update,:create,:destroy]
@@ -30,10 +34,10 @@ ActiveAdmin.register C80Yax::PropName, as: 'PropName' do
     column :uom
     column :is_excluded_from_filtering
     column :is_normal_price
-    column :related do |p|
-      if !p.related.blank?
-        r = C80Yax::PropName.find(p.related)
-        r.title
+    column :related do |pn|
+      if pn.related_id.present?
+        rpn = C80Yax::PropName.find(pn.related_id)
+        rpn.title
       end
     end
 
