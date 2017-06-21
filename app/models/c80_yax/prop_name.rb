@@ -7,7 +7,7 @@ module C80Yax
               length: { in: 2..150 }
 
     # has_many :item_props, :dependent => :destroy
-    # has_and_belongs_to_many :strsubcats
+    has_and_belongs_to_many :strsubcats
     belongs_to :uom
     accepts_nested_attributes_for :uom
 
@@ -19,9 +19,9 @@ module C80Yax
     belongs_to :related,
                class_name: 'C80Yax::ItemProp'
 
-    # has_and_belongs_to_many :main_props
-    # has_and_belongs_to_many :common_props
-    # has_and_belongs_to_many :price_props
+    has_and_belongs_to_many :main_props
+    has_and_belongs_to_many :common_props
+    has_and_belongs_to_many :price_props
 
     default_scope {order(:title => :asc)}
 

@@ -7,6 +7,8 @@ class C80Yax::Strsubcat < ActiveRecord::Base
             uniqueness: true,
             length: { in: 6..50 }
 
+  has_and_belongs_to_many :cats
+
   has_many :subordinates,
            class_name: 'C80Yax::Strsubcat',
            foreign_key: 'parent_id'
@@ -20,26 +22,26 @@ class C80Yax::Strsubcat < ActiveRecord::Base
 
   has_many :items, :dependent => :destroy
 
-  # has_many :main_props, :dependent => :destroy
-  # accepts_nested_attributes_for :main_props,
-  #                               :reject_if => lambda { |attributes|
-  #                                 !attributes.present?
-  #                               },
-  #                               :allow_destroy => true
-  #
-  # has_many :price_props, :dependent => :destroy
-  # accepts_nested_attributes_for :price_props,
-  #                               :reject_if => lambda { |attributes|
-  #                                 !attributes.present?
-  #                               },
-  #                               :allow_destroy => true
-  #
-  # has_many :common_props, :dependent => :destroy
-  # accepts_nested_attributes_for :common_props,
-  #                               :reject_if => lambda { |attributes|
-  #                                 !attributes.present?
-  #                               },
-  #                               :allow_destroy => true
+  has_many :main_props, :dependent => :destroy
+  accepts_nested_attributes_for :main_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  has_many :price_props, :dependent => :destroy
+  accepts_nested_attributes_for :price_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  has_many :common_props, :dependent => :destroy
+  accepts_nested_attributes_for :common_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
 
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged

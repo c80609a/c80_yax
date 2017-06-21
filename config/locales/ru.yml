@@ -3,11 +3,20 @@ ru:
     active_admin:
         menu:
           core_item: 'Каталог'
-          strsubcat: 'Категории'
+          strsubcat: 'Подкатегории'
+          cat: 'Категории'
           item: 'Товары'
+        pages:
+          strsubcat:
+            label_main_props: 'Характеристки, которые выводятся на странице просмотра товара под заголовком (<a class="poiasn" href="%{img}" target="_blank">например</a>)'
+            label_price_props: 'Ценовые характеристики, которые выводятся на странице просмотра товара (<a class="poiasn" href="%{img}" target="_blank">пример</a>)'
+            label_common_props: 'Характеристки, которые выводятся на странице просмотра товара справа (<a class="poiasn" href="%{img}" target="_blank">например</a>)'
   activerecord:
     models:
       strsubcat:
+        one: 'подкатегорию'
+        other: 'Подкатегории'
+      cat:
         one: 'категорию'
         other: 'Категории'
       item:
@@ -29,8 +38,16 @@ ru:
         title: 'Название'
         created_at: 'Дата создания'
         updated_at: 'Обновлено'
-        parent: 'Принадлежит категории'
-        parent_id_in: 'Принадлежит категории'
+        cats: 'Принадлежит категории'
+        parent: 'Принадлежит подкатегории'
+        parent_id_in: 'Принадлежит подкатегории'
+      c80_yax/cat:
+        id: 'id'
+        ord: 'Порядковый №'
+        title: 'Название'
+        strsubcats: 'Подкатегории'
+        created_at: 'Дата создания'
+        updated_at: 'Обновлено'
       c80_yax/item:
         id: 'id'
         title: 'Название'
@@ -42,7 +59,8 @@ ru:
         is_gift: 'Подарочный набор'
         is_starting: 'Стартовый набор'
         is_available: 'В наличии'
-        strsubcat: 'Категория'
+        strsubcat: 'Подкатегория'
+        cat: 'Категория'
         related_parent: 'related_parent'
         related_childs: 'related_childs'
         iphotos: 'Фото'
@@ -52,7 +70,7 @@ ru:
         c80_yax/strsubcat:
           attributes:
             title:
-              taken: 'Категория с таким названием уже существует'
-              blank: 'Укажите, пожалуйста, название категории'
+              taken: 'Подкатегория с таким названием уже существует'
+              blank: 'Укажите, пожалуйста, название подкатегории'
               too_short: 'Название слишком короткое'
               too_long: 'Название слишком длинное'
