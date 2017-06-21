@@ -1,7 +1,7 @@
 module C80Yax
   class PriceProp < ActiveRecord::Base
     belongs_to :strsubcat
-    has_and_belongs_to_many :c80_yax_prop_names
+    has_and_belongs_to_many :prop_names
 
     # выдать таблицу, которая описывает список ценовых свойств, которые выводятся под картинкой
     # +---------------+--------------+---------------------+-----------+---------+
