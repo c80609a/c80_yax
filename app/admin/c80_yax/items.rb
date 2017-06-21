@@ -1,7 +1,7 @@
 # категории строительных материалов
 ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
-  menu :label => proc { I18n.t('c80_yax.active_admin.menu.item') },
+  menu :label => proc {I18n.t('c80_yax.active_admin.menu.item')},
        :parent => 'x_c80_yax',
        :priority => 3
 
@@ -17,7 +17,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :is_available,
                 :strsubcat_id,
                 :iphotos_attributes => [:id, :image, :_destroy],
-                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id]#,
+                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id] #,
   # :vendor_ids => [],
   # :gallery_ids => [],
   # :related_child_ids => []
@@ -35,7 +35,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
   index do
     selectable_column
     id_column
-    
+
     column :iphotos do |item|
       r = ''
       if item.iphotos.count > 0
@@ -47,7 +47,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       end
       r
     end
-    
+
     column :title
     column :is_hit
     column :is_sale
@@ -65,13 +65,17 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     actions
   end
 
+  index as: :grid do |product|
+    product
+  end
+
   form(:html => {:multipart => true}) do |f|
 
     f.inputs 'Свойства' do
       f.input :title
       f.input :strsubcat,
               :as => :select,
-              :collection => C80Yax::Strsubcat.all.map { |s| [s.title, s.id] },
+              :collection => C80Yax::Strsubcat.all.map {|s| [s.title, s.id]},
               :input_html => {
                   :title => '',
                   :class => 'selectpicker',
@@ -95,8 +99,8 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       # https://github.com/justinfrench/formtastic
       f.has_many :iphotos, :allow_destroy => true do |iph|
         iph.input :image,
-                 :as => :file,
-                 :hint => image_tag(iph.object.image.thumb_md)
+                  :as => :file,
+                  :hint => image_tag(iph.object.image.thumb_md)
       end
 
       f.input :full_desc, :as => :ckeditor, :input_html => {:style => 'height:500px', rows: 20}
