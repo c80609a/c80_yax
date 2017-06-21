@@ -15,15 +15,15 @@ module C80Yax
     def self.get_props_for_strsubcat(strsubcat_id)
       sql = "
       SELECT
-        main_props.strsubcat_id,
-        main_props_prop_names.*,
-        prop_names.title,
-        uoms.title as uom_title
-      FROM main_props
-        LEFT JOIN main_props_prop_names ON main_props.id = main_props_prop_names.main_prop_id
-        LEFT JOIN prop_names ON main_props_prop_names.prop_name_id = prop_names.id
-        LEFT JOIN uoms ON prop_names.uom_id = uoms.id
-      WHERE main_props.strsubcat_id = #{strsubcat_id};
+        c80_yax_main_props.strsubcat_id,
+        c80_yax_main_props_prop_names.*,
+        c80_yax_prop_names.title,
+        c80_yax_uoms.title as uom_title
+      FROM c80_yax_main_props
+        LEFT JOIN c80_yax_main_props_prop_names ON c80_yax_main_props.id = c80_yax_main_props_prop_names.main_prop_id
+        LEFT JOIN c80_yax_prop_names ON c80_yax_main_props_prop_names.prop_name_id = c80_yax_prop_names.id
+        LEFT JOIN c80_yax_uoms ON c80_yax_prop_names.uom_id = c80_yax_uoms.id
+      WHERE c80_yax_main_props.strsubcat_id = #{strsubcat_id};
     "
       rows = ActiveRecord::Base.connection.execute(sql)
       rows

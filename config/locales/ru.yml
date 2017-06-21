@@ -8,6 +8,8 @@ ru:
           item: 'Товары'
         pages:
           strsubcat:
+            label_view_title: 'Настройки подкатегории'
+            label_all_props: 'Характеристики, которыми описываются товары из этой подкатегории'
             label_main_props: 'Характеристки, которые выводятся на странице просмотра товара под заголовком (<a class="poiasn" href="%{img}" target="_blank">например</a>)'
             label_price_props: 'Ценовые характеристики, которые выводятся на странице просмотра товара (<a class="poiasn" href="%{img}" target="_blank">пример</a>)'
             label_common_props: 'Характеристки, которые выводятся на странице просмотра товара справа (<a class="poiasn" href="%{img}" target="_blank">например</a>)'

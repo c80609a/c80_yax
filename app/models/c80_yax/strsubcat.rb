@@ -2,6 +2,8 @@ require 'babosa'
 
 class C80Yax::Strsubcat < ActiveRecord::Base
 
+  include C80Yax::Concerns::StrsubcatViewUtils
+
   validates :title,
             presence: true,
             uniqueness: true,

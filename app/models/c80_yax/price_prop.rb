@@ -1,7 +1,7 @@
 module C80Yax
   class PriceProp < ActiveRecord::Base
     belongs_to :strsubcat
-    has_and_belongs_to_many :prop_names
+    has_and_belongs_to_many :c80_yax_prop_names
 
     # выдать таблицу, которая описывает список ценовых свойств, которые выводятся под картинкой
     # +---------------+--------------+---------------------+-----------+---------+
@@ -13,15 +13,15 @@ module C80Yax
     def self.gget_pprops_for_strsubcat(strsubcat_id)
       sql = "
     SELECT
-      price_props_prop_names.*,
-      prop_names.title,
-      uoms.title as uom_title,
-      prop_names.related
-    FROM price_props
-      LEFT JOIN price_props_prop_names ON price_props.id = price_props_prop_names.price_prop_id
-      LEFT JOIN prop_names ON price_props_prop_names.prop_name_id = prop_names.id
-      LEFT JOIN uoms ON prop_names.uom_id = uoms.id
-    WHERE price_props.strsubcat_id = #{strsubcat_id};
+      c80_yax_price_props_prop_names.*,
+      c80_yax_prop_names.title,
+      c80_yax_uoms.title as uom_title,
+      c80_yax_prop_names.related_id
+    FROM c80_yax_price_props
+      LEFT JOIN c80_yax_price_props_prop_names ON c80_yax_price_props.id = c80_yax_price_props_prop_names.price_prop_id
+      LEFT JOIN c80_yax_prop_names ON c80_yax_price_props_prop_names.prop_name_id = c80_yax_prop_names.id
+      LEFT JOIN c80_yax_uoms ON c80_yax_prop_names.uom_id = c80_yax_uoms.id
+    WHERE c80_yax_price_props.strsubcat_id = #{strsubcat_id};
     "
       rows = ActiveRecord::Base.connection.execute(sql)
       rows

@@ -48,22 +48,11 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
     # column :parent
 
     column :cats do |str_sub_cat|
-      str = '-'
-      if str_sub_cat.cats.count > 0
-        str = str_sub_cat.cats.first.title
-      end
-      str
+      str_sub_cat.cat_admin_title
     end
 
     column :prop_names do |strsubcat|
-      res = '-'
-      if strsubcat.prop_names.count > 0
-        res = ''
-        strsubcat.prop_names.map do |prop_name|
-          res += "• #{prop_name.title}<br>"
-        end
-      end
-      res.html_safe
+      strsubcat.all_props_list
     end
 
     actions
@@ -104,7 +93,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
 
     end
 
-    f.inputs 'Характеристики, которыми описываются товары из этой подкатегории', :class => 'collapsed' do
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_all_props'), :class => 'collapsed' do
       f.input :prop_names, :as => :check_boxes
     end
 
@@ -123,9 +112,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
                             },
                             :multiple => false
                         },
-                        :collection => C80Yax::PropName
-                                           .includes(:strsubcats)
-                                           .where(:c80_yax_strsubcats => {:id => f.object.id})
+                        :collection => f.object.main_props_collection
 
       end
     end
@@ -145,10 +132,7 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
                              },
                              :multiple => false
                          },
-                        :collection => C80Yax::PropName
-                                           .includes(:strsubcats)
-                                           .where(:c80_yax_strsubcats => {:id => f.object.id})
-                                           .where(:c80_yax_prop_names => {:is_normal_price => 1})
+                        :collection => f.object.price_props_collection
       end
     end
 
@@ -167,13 +151,15 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
                               },
                               :multiple => false
                           },
-                         :collection => C80Yax::PropName
-                                            .includes(:strsubcats)
-                                            .where(:c80_yax_strsubcats => {:id => f.object.id})
+                         :collection => f.object.common_props_collection
       end
     end
 
     f.actions
+  end
+
+  show do
+    render 'view', { s: strsubcat }
   end
 
 end

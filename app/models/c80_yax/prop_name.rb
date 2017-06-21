@@ -1,6 +1,8 @@
 module C80Yax
   class PropName < ActiveRecord::Base
 
+    include C80Yax::Concerns::PropNameViewUtils
+
     validates :title,
               presence: true,
               uniqueness: true,
