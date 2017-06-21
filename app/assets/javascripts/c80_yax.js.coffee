@@ -1,6 +1,8 @@
 
+#= require lib_backend/init
 #= require lib_backend/collapsable-groups
 #= require lib_backend/jalert
+#= require lib_backend/loading
+#= require lib_backend/custom_columns
 
-# require ./backend/init # это должно быть включено в host app
 #= require_tree ./backend
