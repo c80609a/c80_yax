@@ -3,7 +3,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
   menu :label => proc { I18n.t('c80_yax.active_admin.menu.item') },
        :parent => 'x_c80_yax',
-       :priority => 2
+       :priority => 3
 
 
   permit_params :title,

@@ -409,7 +409,7 @@ var fEdit = function () {
     fLoadingShow();
 };
 
-YOUR_APP.items = {
+C80_YAX.items = {
     edit: fEdit,
     "new": jsinit.go//,
     //create: jsinit.go
