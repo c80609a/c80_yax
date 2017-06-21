@@ -37,18 +37,11 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     id_column
 
     column :iphotos do |item|
-      r = ''
-      if item.iphotos.count > 0
-        r = link_to image_tag(item.iphotos.first.image.thumb_md,
-                              style: 'width:150px'),
-                    item.iphotos.first.image.url,
-                    target: '_blank'
-        r = "#{r}<br>Всего фотографий: #{item.iphotos.count}".html_safe
-      end
-      r
+      item.iphotos_short_view
     end
 
     column :title
+    column :strsubcat
     column :is_hit
     column :is_sale
     column :is_main
