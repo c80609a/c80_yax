@@ -3,6 +3,7 @@ require 'babosa'
 class C80Yax::Strsubcat < ActiveRecord::Base
 
   include C80Yax::Mixins::Strsubcat::Database::Props
+  include C80Yax::Mixins::Strsubcat::Database::PropNamesChanged
 
   validates :title,
             presence: true,
@@ -18,9 +19,9 @@ class C80Yax::Strsubcat < ActiveRecord::Base
   belongs_to :parent,
              class_name: 'C80Yax::Strsubcat'
 
-  has_and_belongs_to_many :prop_names#,
-                          #:after_add => :after_add_prop_names,
-                          #:after_remove => :after_remove_prop_names
+  has_and_belongs_to_many :prop_names,
+                          :after_add => :after_add_prop_names,
+                          :after_remove => :after_remove_prop_names
 
   has_many :items, :dependent => :destroy
 

@@ -37,9 +37,9 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
   #            }
   #        }
 
-  # controller do
-  #   cache_sweeper :suit_sweeper, :only => [:update,:create,:destroy]
-  # end
+  controller do
+    C80Yax::Strsubcat.add_observer(C80Yax::StrsubcatObserver.instance)
+  end
 
   index do
     selectable_column
