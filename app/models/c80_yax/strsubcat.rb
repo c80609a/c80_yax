@@ -24,7 +24,6 @@ class C80Yax::Strsubcat < ActiveRecord::Base
 
   has_many :items, :dependent => :destroy
 
-  # TODO-3:: перенести этот блок с описанием связей с (common|main|prefix)_props в `..concern.rb`
   # <editor-fold desc="# PROPS">
   has_many :main_props, :dependent => :destroy
   accepts_nested_attributes_for :main_props,
