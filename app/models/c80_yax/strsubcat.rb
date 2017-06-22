@@ -2,6 +2,8 @@ require 'babosa'
 
 class C80Yax::Strsubcat < ActiveRecord::Base
 
+  # TODO-1:: refactoring-1: затем переименовать файл `strsubcat_view_utils.rb` в `strsubcat_view.rb`
+  # TODO-1:: refactoring-2: и после переименования изменить эту строку include
   include C80Yax::Concerns::StrsubcatViewUtils
 
   validates :title,
@@ -24,6 +26,8 @@ class C80Yax::Strsubcat < ActiveRecord::Base
 
   has_many :items, :dependent => :destroy
 
+  # TODO-3:: перенести этот блок с описанием связей с (common|main|prefix)_props в `..concern.rb`
+  # <editor-fold desc="# PROPS">
   has_many :main_props, :dependent => :destroy
   accepts_nested_attributes_for :main_props,
                                 :reject_if => lambda { |attributes|
@@ -44,6 +48,15 @@ class C80Yax::Strsubcat < ActiveRecord::Base
                                   !attributes.present?
                                 },
                                 :allow_destroy => true
+
+  has_many :prefix_props, :dependent => :destroy
+  accepts_nested_attributes_for :prefix_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  # </editor-fold>
 
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged
