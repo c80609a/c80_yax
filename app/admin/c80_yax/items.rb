@@ -17,8 +17,8 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :is_available,
                 :strsubcat_id,
                 :iphotos_attributes => [:id, :image, :_destroy],
-                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id] #,
-  # :vendor_ids => [],
+                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id],
+                :vendor_ids => []
   # :gallery_ids => [],
   # :related_child_ids => []
 
@@ -47,13 +47,9 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     column :is_main
     # column :is_ask_price
 
-    # column 'Бренд' do |itm|
-    #   str = '-'
-    #   if itm.vendors.count > 0
-    #     str = itm.vendors.first.title
-    #   end
-    #   str
-    # end
+    column :vendor do |itm|
+      print_vendor(itm)
+    end
 
     actions
   end
@@ -97,8 +93,17 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       end
 
       f.input :full_desc, :as => :ckeditor, :input_html => {:style => 'height:500px', rows: 20}
-      # f.input :vendors, :as => :select, :input_html => {:multiple => false}, :include_blank => true
-
+      f.input :vendors,
+              :as => :select,
+              :input_html => {
+                  :title => '',
+                  :class => 'selectpicker',
+                  :data => {
+                      :size => 10
+                  },
+                  :multiple => false
+              },
+              :include_blank => true
 
     end
 
