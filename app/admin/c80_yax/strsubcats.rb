@@ -13,7 +13,8 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
                 :prop_name_ids => [],
                 :main_props_attributes => [:id, :_destroy, :prop_name_ids => []],
                 :common_props_attributes => [:id, :_destroy, :prop_name_ids => []],
-                :price_props_attributes => [:id, :_destroy, :prop_name_ids => []]
+                :price_props_attributes => [:id, :_destroy, :prop_name_ids => []],
+                :prefix_props_attributes => [:id, :_destroy, :prop_name_ids => []]
 
   config.sort_order = 'id_asc'
 
@@ -152,6 +153,25 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
                               :multiple => false
                           },
                          :collection => f.object.common_props_collection
+      end
+    end
+
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_prefix_props',
+                    img: image_url('samples/2017-06-21_item_prefix_props.jpg')),
+             :class => 'collapsed fieldset_common_props' do
+      f.has_many :prefix_props, allow_destroy: true do |prefix_prop|
+        prefix_prop.input :prop_names,
+                          :as => :select,
+                          :input_html => {
+                              :class => 'selectpicker',
+                              :title => ' ',
+                              :data => {
+                                  :size => '10',
+                                  :width => '400px'
+                              },
+                              :multiple => false
+                          },
+                          :collection => f.object.prefix_props_collection
       end
     end
 
