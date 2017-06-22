@@ -9,31 +9,31 @@
   <tbody>
     <tr>
       <td><%= I18n.t('activerecord.attributes.c80_yax/strsubcat.cats') %></td>
-      <td><%= s.cat_admin_title %></td>
+      <td><%= cat_admin_title(s) %></td>
     </tr>
     <tr>
       <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_all_props') %></td>
-      <td><%= s.all_props_list %></td>
+      <td><%= all_props_list(s) %></td>
     </tr>
     <tr>
       <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_main_props',
                      img: image_url('samples/2017_06_20_item_main_props.jpg')).html_safe %></td>
-      <td><%= s.main_props_list %></td>
+      <td><%= main_props_list(s) %></td>
     </tr>
     <tr>
       <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_price_props',
                      img: image_url('samples/2017_06_20_item_price_props.jpg')).html_safe %></td>
-      <td><%= s.price_props_list %></td>
+      <td><%= price_props_list(s) %></td>
     </tr>
     <tr>
       <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_common_props',
                      img: image_url('samples/2017_06_20_item_common_props.jpg')).html_safe %></td>
-      <td><%= s.common_props_list %></td>
+      <td><%= common_props_list(s) %></td>
     </tr>
     <tr>
       <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_prefix_props',
                      img: image_url('samples/2017-06-21_item_prefix_props.jpg')).html_safe %></td>
-      <td><%= s.prefix_props_list %></td>
+      <td><%= prefix_props_list(s) %></td>
     </tr>
   </tbody>
 

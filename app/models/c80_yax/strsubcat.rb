@@ -2,9 +2,7 @@ require 'babosa'
 
 class C80Yax::Strsubcat < ActiveRecord::Base
 
-  # TODO-1:: refactoring-1: затем переименовать файл `strsubcat_view_utils.rb` в `strsubcat_view.rb`
-  # TODO-1:: refactoring-2: и после переименования изменить эту строку include
-  include C80Yax::Concerns::StrsubcatViewUtils
+  include C80Yax::Mixins::Strsubcat::Database::Props
 
   validates :title,
             presence: true,

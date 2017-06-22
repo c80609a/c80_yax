@@ -49,11 +49,11 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
     # column :parent
 
     column :cats do |str_sub_cat|
-      str_sub_cat.cat_admin_title
+      cat_admin_title(str_sub_cat)
     end
 
     column :prop_names do |strsubcat|
-      strsubcat.all_props_list
+      all_props_list(strsubcat)
     end
 
     actions
