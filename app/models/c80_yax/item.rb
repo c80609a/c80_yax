@@ -2,8 +2,6 @@ require 'babosa'
 
 class C80Yax::Item < ActiveRecord::Base
 
-  include C80Yax::Concerns::ItemViewUtils
-
   validates :title,
             presence: true,
             uniqueness: true,
