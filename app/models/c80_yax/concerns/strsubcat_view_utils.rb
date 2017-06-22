@@ -4,6 +4,37 @@ module C80Yax
       extend ActiveSupport::Concern
       include C80Yax::UomHelper
 
+
+      # выдать collection of `main props`, связанных с этой подкатегорией
+      def main_props_collection
+        C80Yax::PropName
+            .includes(:strsubcats)
+            .where(:c80_yax_strsubcats => {:id => self.id})
+      end
+
+      # выдать collection of `price props` associated with this Strsubcat
+      def price_props_collection
+        C80Yax::PropName
+            .includes(:strsubcats)
+            .where(:c80_yax_strsubcats => {:id => self.id})
+            .where(:c80_yax_prop_names => {:is_normal_price => 1})
+      end
+
+      # выдать collection of `common props` associated with this Strsubcat
+      def common_props_collection
+        C80Yax::PropName
+            .includes(:strsubcats)
+            .where(:c80_yax_strsubcats => {:id => self.id})
+      end
+
+      def prefix_props_collection
+        C80Yax::PropName
+            .includes(:strsubcats)
+            .where(:c80_yax_strsubcats => {:id => self.id})
+      end
+
+      # TODO-1:: refactoring-0: всё, что ниже, перенести в helper
+
       # выдать название родительской категории в виде active_admin-ссылки
       def cat_admin_title
         str = '-'
@@ -61,26 +92,15 @@ module C80Yax
         res.html_safe
       end
 
-      # выдать collection of `main props`, связанных с этой подкатегорией
-      def main_props_collection
-        C80Yax::PropName
-            .includes(:strsubcats)
-            .where(:c80_yax_strsubcats => {:id => self.id})
-      end
-
-      # выдать collection of `price props` associated with this Strsubcat
-      def price_props_collection
-        C80Yax::PropName
-            .includes(:strsubcats)
-            .where(:c80_yax_strsubcats => {:id => self.id})
-            .where(:c80_yax_prop_names => {:is_normal_price => 1})
-      end
-
-      # выдать collection of `common props` associated with this Strsubcat
-      def common_props_collection
-        C80Yax::PropName
-            .includes(:strsubcats)
-            .where(:c80_yax_strsubcats => {:id => self.id})
+      # выдать html unordered list of 'common props'
+      def prefix_props_list
+        res = ''
+        C80Yax::PrefixProp.get_props_for_strsubcat(self.id).each do |el|
+          s = el[3]
+          s += pretty_uom_print_title(el[4]) unless el[4].nil?
+          res += "• #{s}<br>"
+        end
+        res.html_safe
       end
 
     end
