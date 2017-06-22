@@ -26,7 +26,7 @@ module C80Yax
         if strsubcat.prop_names.count > 0
           res = ''
           strsubcat.prop_names.each do |prop_name|
-            res += "• #{prop_name.title_with_uom}<br>"
+            res += "• #{title_with_uom(prop_name)}<br>"
           end
         end
         res.html_safe
