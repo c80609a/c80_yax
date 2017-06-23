@@ -5,7 +5,7 @@ body.admin_items {
 
     // здесь живут фото товара
     li.iphotos.has_many_container {
-      @include clearfx;
+      @include clearfix;
       padding-left: 20%;
       margin-bottom: 15px;
 
