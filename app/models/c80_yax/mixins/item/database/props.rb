@@ -60,7 +60,12 @@ module C80Yax
 
           end
 
-          # здесь хранятся данные из runtime таблицы
+          # сформировать список common свойств предмета
+          def common_props
+            C80Yax::CommonProp.get_props_parsed(self.strsubcat_id, item_as_hash)
+          end
+
+          # здесь хранятся данные о предмете из runtime таблицы
           def item_as_hash
             @item_as_hash ||= get_item_as_hash
           end

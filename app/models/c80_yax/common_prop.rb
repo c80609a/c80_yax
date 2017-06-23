@@ -3,6 +3,8 @@ module C80Yax
     belongs_to :strsubcat
     has_and_belongs_to_many :prop_names
 
+    include C80Yax::Concerns::Props::Parsable
+
 # +--------------+----------------+--------------+--------------------------------------------------------+---------------+
 # | strsubcat_id | common_prop_id | prop_name_id | title                                                  | uom_title     |
 # +--------------+----------------+--------------+--------------------------------------------------------+---------------+
@@ -42,6 +44,16 @@ module C80Yax
       rows = ActiveRecord::Base.connection.execute(sql)
       rows
 
+    end
+
+    # Выдать стуктуру, годную для обработки для view,
+    # в которой содержатся данные характеристиках предмета.
+    # +strsubcat_id+ подкатегория, которой принадлежит Товар
+    # +item_as_hash+ это результат запроса к runtime таблице
+
+    def self.get_props_parsed(strsubcat_id, item_as_hash)
+      rows = self.get_props_for_strsubcat(strsubcat_id)
+      self.parse_sql_props(rows, item_as_hash)
     end
 
   end
