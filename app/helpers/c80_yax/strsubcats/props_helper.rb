@@ -46,7 +46,7 @@ module C80Yax
       # выдать html unordered list of 'price props'
       def price_props_list(strsubcat)
         res = ''
-        C80Yax::PriceProp.gget_pprops_for_strsubcat(strsubcat.id).each do |el|
+        C80Yax::PriceProp.select_props_sql(strsubcat.id).each do |el|
           s = el[2]
           s += pretty_uom_print_title(el[3]) unless el[3].nil?
           res += "• #{s}<br>"
@@ -57,7 +57,7 @@ module C80Yax
       # выдать html unordered list of 'common props'
       def common_props_list(strsubcat)
         res = ''
-        C80Yax::CommonProp.get_props_for_strsubcat(strsubcat.id).each do |el|
+        C80Yax::CommonProp.select_props_sql(strsubcat.id).each do |el|
           s = el[3]
           s += pretty_uom_print_title(el[4]) unless el[4].nil?
           res += "• #{s}<br>"
@@ -68,7 +68,7 @@ module C80Yax
       # выдать html unordered list of 'common props'
       def prefix_props_list(strsubcat)
         res = ''
-        C80Yax::PrefixProp.get_props_for_strsubcat(strsubcat.id).each do |el|
+        C80Yax::PrefixProp.select_props_sql(strsubcat.id).each do |el|
           s = el[3]
           s += pretty_uom_print_title(el[4]) unless el[4].nil?
           res += "• #{s}<br>"

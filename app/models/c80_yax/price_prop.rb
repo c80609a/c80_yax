@@ -3,6 +3,8 @@ module C80Yax
     belongs_to :strsubcat
     has_and_belongs_to_many :prop_names
 
+    include C80Yax::Concerns::Props::Parsable
+
     # выдать таблицу, которая описывает список ценовых свойств, которые выводятся под картинкой
     # +---------------+--------------+---------------------+-----------+---------+
     # | price_prop_id | prop_name_id | title               | uom_title | related |
@@ -10,7 +12,8 @@ module C80Yax
     # |             1 |           18 | Цена за шт.         | руб       |      19 |
     # |             2 |           20 | Цена за м²          | руб       |      21 |
     # +---------------+--------------+---------------------+-----------+---------+
-    def self.gget_pprops_for_strsubcat(strsubcat_id)
+
+    def self.select_props_sql(strsubcat_id)
       sql = "
     SELECT
       c80_yax_price_props_prop_names.*,
@@ -29,7 +32,7 @@ module C80Yax
 
     # выдать id Имени Свойства типа "цена", по которому будет происходить "сортировка по цене"
     def self.gget_sort_pprop_for_strsubcat(strsubcat_id)
-      rows = self.gget_pprops_for_strsubcat(strsubcat_id)
+      rows = self.select_props_sql(strsubcat_id)
       if rows.count > 0
         rows.each(:as => :hash) do |row|
           return row["prop_name_id"]
