@@ -16,6 +16,8 @@ module C80Yax
     #         • если свойства, присущ. подкатегории, были удалены - чистим от них таблицу item_props
     def after_update(strsubcat)
 
+      # TODO-0:: проверить, что таблица удаляется, затем создаётся и заполняется, когда добавляем свойства
+
       if strsubcat.prop_names_changed?
         Rails.logger.debug '[TRACE] <StrsubcatObserver.after_update> Удаляем таблицу, чистим item_props.'
         # byebug
