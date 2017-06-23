@@ -12,6 +12,13 @@ module C80Yax
         str
       end
 
+      def item_print_full_desc(itm)
+        r = ''
+        # noinspection RubyResolve
+        r = itm.full_desc if itm.full_desc.present?
+        r.html_safe
+      end
+
     end
   end
 end
