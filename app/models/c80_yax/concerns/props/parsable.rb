@@ -15,17 +15,17 @@ module C80Yax
           # +item_as_hash+ это результат запроса к runtime таблице
 
           def get_props_parsed(strsubcat_id, item_as_hash)
-            rows = self.__select_props(strsubcat_id)
+            rows = self.select_props_sql(strsubcat_id)
             self.__parse_sql_props(rows, item_as_hash)
           end
 
-          protected
-
-          # сервисный метод. переопределится в классе
+          # переопределится в классе
           # noinspection RubyUnusedLocalVariable
-          def __select_props(strsubcat_id)
+          def select_props_sql(strsubcat_id)
 
           end
+
+          protected
 
           # сервисный метод. Парсит результат sql запросов
           # в структуру, подходящую для view

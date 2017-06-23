@@ -40,24 +40,7 @@ module C80Yax
 
           # сформировать список main свойств предмета
           def main_props
-
-            result = {
-                titles: [],
-                values: [],
-                uoms:   []
-            }
-
-            rows = C80Yax::MainProp.get_props_for_strsubcat(self.strsubcat_id)
-            rows.each(:as => :hash) do |row|
-
-              result[:titles] << row['title']
-              result[:values] << item_as_hash['prop_'+row['prop_name_id'].to_s]
-              result[:uoms] << row['uom_title']
-
-            end
-
-            result
-
+            C80Yax::MainProp.get_props_parsed(self.strsubcat_id, item_as_hash)
           end
 
           # сформировать список common свойств предмета

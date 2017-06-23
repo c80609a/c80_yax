@@ -3,6 +3,8 @@ module C80Yax
     belongs_to :strsubcat
     has_and_belongs_to_many :prop_names
 
+    include C80Yax::Concerns::Props::Parsable
+
     # выдать таблицу, которая описывает список свойств, которые выводятся справа от картинки
     # +--------------+--------------+--------------+---------------------------+-----------+
     # | strsubcat_id | main_prop_id | prop_name_id | title                     | uom_title |
@@ -12,7 +14,8 @@ module C80Yax
     # |            1 |            3 |           33 | Вес                       | кг        |
     # |            1 |            4 |           28 | Водопоглощение            | %         |
     # +--------------+--------------+--------------+---------------------------+-----------+
-    def self.get_props_for_strsubcat(strsubcat_id)
+
+    def self.select_props_sql(strsubcat_id)
       sql = "
       SELECT
         c80_yax_main_props.strsubcat_id,

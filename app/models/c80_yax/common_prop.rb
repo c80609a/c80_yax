@@ -28,7 +28,7 @@ module C80Yax
 # |            7 |             18 |           58 | Норма загрузки                                         | шт            |
 # +--------------+----------------+--------------+--------------------------------------------------------+---------------+
 
-    def self.__select_props(strsubcat_id)
+    def self.select_props_sql(strsubcat_id)
       sql = "
       SELECT
         c80_yax_common_props.strsubcat_id,

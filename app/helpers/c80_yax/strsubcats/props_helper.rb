@@ -35,7 +35,7 @@ module C80Yax
       # выдать html unordered list of 'main props'
       def main_props_list(strsubcat)
         res = ''
-        C80Yax::MainProp.get_props_for_strsubcat(strsubcat.id).each do |el|
+        C80Yax::MainProp.select_props_sql(strsubcat.id).each do |el|
           s = el[3]
           s += pretty_uom_print_title(el[4]) unless el[4].nil?
           res += "• #{s}<br>"
