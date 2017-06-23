@@ -1,0 +1,6 @@
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+  &:before {
+    color: $red;
+  }
+}
