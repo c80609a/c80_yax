@@ -17,8 +17,23 @@ module C80Yax
           r
         end
 
-        # вывести magnific popup slider фотографий товара
-        def item_photos(item)
+        # вывести lazy magnific popup slider фотографий товара
+        # С помощью +thumb_type+ можно задать, какие версии фотографий будут использованы в слайдере
+        def item_photos(item, thumb_type = 'thumb_lg')
+
+          # TODO-0:: реализовать gem и использовать его тут в том виде, какой описан в комментах
+          #
+          # photos = {
+          #   thumb_list: ['image01_thumb_lg.jpg'], # на основе этого строится slider
+          #   big_list: ['image01.jpg'] # эти фотки magnific открываются
+          # }
+          # c80_lazy_maginific_popup_slider(photos)
+
+          r = ''
+          if item.iphotos.count > 0
+            r = image_tag(item.iphotos.first.image.send(thumb_type))
+          end
+          r.html_safe
 
         end
 
