@@ -10,6 +10,8 @@ class StrsubcatRuntimeTables
 
     def self.table_fill(strsubcat_id) # strh_table_fill
 
+      # NOTE:: [columns] эти столбцы должны соответствовать (комментарий как wiki)
+
       # [0] item_props.prop_name_id,
       # [1] prop_names.title AS prop_name_title,
       # [2] item_props.value,
@@ -32,6 +34,9 @@ class StrsubcatRuntimeTables
       # выбираем свойства предметов вместе с инфой о предметах, которым они принадлежат
 
       # <editor-fold desc="# составляем и выполняем sql запрос">
+
+      # NOTE:: [columns] эти столбцы должны соответствовать
+
       sql = "
             SELECT
               `c80_yax_item_props`.`prop_name_id`,
@@ -59,10 +64,10 @@ class StrsubcatRuntimeTables
               LEFT JOIN `c80_yax_items_vendors` ON `c80_yax_items_vendors`.`item_id` = `c80_yax_items`.`id`
               LEFT JOIN `c80_yax_vendors` ON `c80_yax_vendors`.`id` = `c80_yax_items_vendors`.`vendor_id`
             WHERE (`c80_yax_strsubcats`.`id` = #{strsubcat_id})
-    "
+      "
         records = ActiveRecord::Base.connection.execute(sql)
         records
-# </editor-fold>
+      # </editor-fold>
 
       # 1. заполняем хэш объектами для составления sql-команд INSERT
       hash_sql = self.hash_sql_make(records, strsubcat_id)
@@ -73,6 +78,7 @@ class StrsubcatRuntimeTables
 
     end
 
+=begin
     # выдать список вещей из указанной подкатегории (возможно, применяя фильтры)
     def strh_items_filter(strsubcat_id, page, per_page, sorting_type, filter_params = {})
 
@@ -105,7 +111,9 @@ class StrsubcatRuntimeTables
       items
 
     end
+=end
 
+=begin
     # от метода ожидается результат: хэш вида {"3"=>["900 кг/м3", "1450 кг/м3"], "5"=>["300 мм", "2300 x 1250 x 900"], "9"=>["20 %", "13%", "12%"]}
     def strh_collect_allowed_vals(strsubcat_id,filter_params={})
       # filter_params = {"1"=>"5 кг", "3"=>"-1", "5"=>"-1", "9"=>"-1"}
@@ -152,7 +160,9 @@ class StrsubcatRuntimeTables
       res
 
     end
+=end
 
+=begin
     # Для подкатегории strsubcat_id соберёт список всех характеристик,
     # по которым строится фильтр панель.
     #
@@ -184,6 +194,7 @@ class StrsubcatRuntimeTables
       result
 
     end
+=end
 
     # создаёт таблицу под все вещи подкатегории, если такой таблицы нету в базе
     def self.table_check_and_build(strsubcat) # strh_table_check_and_build
@@ -211,6 +222,7 @@ class StrsubcatRuntimeTables
       end
       # </editor-fold>
 
+      # Теперь определимся, нужно ли дропнуть и создать таблицу
       if ActiveRecord::Base.connection.table_exists? runtime_table_name
         Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.table_check_and_build> Таблица уже существует: #{runtime_table_name}"
 
@@ -243,6 +255,7 @@ class StrsubcatRuntimeTables
         mark_create_table = true
       end
 
+      # Если таблицу надо создать - создаём
       if mark_create_table
         self.table_create(runtime_table_name, propnames_ids)
       end
@@ -257,6 +270,8 @@ class StrsubcatRuntimeTables
 
       ActiveRecord::Migration.create_table(runtime_table_name, :options => 'COLLATE=utf8_unicode_ci') do |t|
 
+        # NOTE:: [columns] эти столбцы должны соответствовать (создание новой таблицы)
+
         t.integer :item_id
         t.string :item_title
         t.boolean :is_main
@@ -265,9 +280,12 @@ class StrsubcatRuntimeTables
         t.integer :strsubcat_id
         t.string :strsubcat_slug
         t.integer :vendor_id
-        t.text :desc
+        t.text :full_desc
         t.string :image
         t.boolean :is_ask_price
+        t.boolean :is_gift
+        t.boolean :is_starting
+        t.boolean :is_available
 
         t.index :item_id, unique: true
 
@@ -366,6 +384,7 @@ class StrsubcatRuntimeTables
       end
     end
 
+=begin
     # в таблице типа strcat_111_items обновить поля строки, описывающую вещь item_id
     def strh_item_update(strsubcat_id,item_id)
       Rails.logger.debug "[TRACE] <strh_item_update> В таблице strcat_#{strsubcat_id}_items обновим данные о товаре item_id = #{item_id}"
@@ -384,7 +403,7 @@ class StrsubcatRuntimeTables
       strsubcats.slug AS strsubcat_slug,
       vendors.id as vendor_id,
       vendors.title as vendor_title,
-      items.desc,
+      items.full_desc,
       items.image,
       items.is_ask_price
     FROM `items`
@@ -410,7 +429,9 @@ class StrsubcatRuntimeTables
 
       Rails.logger.debug "[TRACE] <strh_item_update> END"
     end
+=end
 
+=begin
     # выдать строку, описывающую товар с id=item_id из подкатегории id=strsubcat_id
     # {"id"=>84, "item_id"=>1, "item_title"=>"Кирпич облицовочный Labassa стандарт качества Qbricks", "is_main"=>0, "is_hit"=>0, "is_sale"=>1, "strsubcat_slug"=>"kirpich", "prop_18"=>"13,85", "prop_19"=>"15", "prop_20"=>"16", "prop_21"=>"18", "prop_23"=>"250 x 85 x 65 мм", "prop_24"=>"Румыния", "prop_25"=>"150", "prop_26"=>"0,60", "prop_27"=>"F300", "prop_28"=>"12,8", "prop_29"=>"красный", "prop_30"=>"пустотелый", "prop_31"=>"пластичное формование", "prop_32"=>"гладкая", "prop_33"=>"1,5", "prop_34"=>"458", "prop_35"=>"лицевой, фасадный", "prop_36"=>"Ibstock", "prop_37"=>"GE-02 A", "prop_38"=>"BS"}
     def strh_item_get(strsubcat_id,item_id)
@@ -423,9 +444,11 @@ class StrsubcatRuntimeTables
         return row
       end
     end
+=end
 
     private
 
+=begin
     def compose_where_sql(filter_params={},table_name)
       result = []
       a = filter_params
@@ -438,7 +461,9 @@ class StrsubcatRuntimeTables
         ""
       end
     end
+=end
 
+=begin
     # от метода ожидается результат: строка вида ", GROUP_CONCAT(prop_3 SEPARATOR '----') all_prop_3, GROUP_CONCAT(prop_5 SEPARATOR '----') all_prop_5"
     def compose_group_concat_sql(filter_params={})
       # filter_params = {"1"=>"5 кг", "3"=>"-1", "5"=>"-1", "9"=>"-1"}
@@ -450,6 +475,7 @@ class StrsubcatRuntimeTables
       ", #{res.join(", ")}"
 
     end
+=end
 
     # NOTE:: этот метод вообще работает?
     def is_only_one_filter_use(filter_params={})
@@ -476,6 +502,7 @@ class StrsubcatRuntimeTables
 
     end
 
+=begin
     # собираем все доступные значения для селекта
     def strh_collect_all_vals(prop_id,table_name)
       # SELECT
@@ -503,9 +530,10 @@ class StrsubcatRuntimeTables
       res
 
     end
+=end
 
-    def self.hash_sql_make(records,strsubcat_id)
-      Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.hash_sql_make> Составляем SQL для обновления записи в runtime-таблице `c80_yax_strcat_#{strsubcat_id}_items`. records = #{records}."
+    def self.hash_sql_make(records, strsubcat_id)
+      Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.hash_sql_make> Составляем SQL для обновления/создания записи в runtime-таблице `c80_yax_strcat_#{strsubcat_id}_items`. records.count = #{records.count}."
 
       hash_sql = {}
 
@@ -516,10 +544,8 @@ class StrsubcatRuntimeTables
         item_id = item_prop[3]
         is_ask_price = item_prop[14]
 
-        # пригодится, если is_ask_price.to_i == 1
-        # is_price = PropName.find(prop_name_id).is_normal_price # не подходит, т.к. нужна только "цена за шт"
-        is_price = prop_name_id == 18
 
+        # <editor-fold desc="# производим магические манипуляции с Производителем">
         # если это свойство "бренд" -
         # то игнорируем значение, которое лежит в таблице itep_props
         vendor_id = item_prop[10]
@@ -535,7 +561,9 @@ class StrsubcatRuntimeTables
         unless vendor_id.present?
           vendor_id = -1
         end
+        # </editor-fold>
 
+        # <editor-fold desc="# манипулируем с is_ask_price">
         if is_ask_price.present?
           if is_price
             # если у товара is_ask_price = true, то игнорируем значение, которое лежит в таблице
@@ -557,7 +585,9 @@ class StrsubcatRuntimeTables
           # защищаемся от ошибки "Mysql2::Error: Incorrect integer value: '' for column 'is_ask_price'"
           is_ask_price = 0
         end
+        # </editor-fold>
 
+        # кэшируем первый раз
         unless hash_sql[item_id].present?
           # Rails.logger.debug "\t new hash"
           hash_sql[item_id] = {
@@ -567,8 +597,10 @@ class StrsubcatRuntimeTables
           }
         end
 
+        # byebug
         Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.hash_sql_make> prop_name_id: #{prop_name_id}, prop_value: #{prop_value}."
 
+        # добавляем в кэш
         hash_sql[item_id][:prop_names_ids] << "prop_#{prop_name_id}"
         hash_sql[item_id][:values] << prop_value
 
@@ -604,11 +636,12 @@ class StrsubcatRuntimeTables
         begin
           ActiveRecord::Base.connection.execute(sql)
         rescue Exception => e
-          Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.hash_sql_execute> Нестрашная ошибка: #{e}"
+          Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.hash_sql_execute> #{e}"
         end
       end
     end
 
+=begin
     # составить sql строку, которая прицепится к запросу выборки вещей
     # и будет содержать комаду вида:
     # "отсортировать по 'цене 1' по возрастанию или по убыванию"
@@ -623,5 +656,6 @@ class StrsubcatRuntimeTables
       Rails.logger.debug "<order_by_sql_make> Сортировка по 'цене 1': '#{result}'"
       result
     end
+=end
 
 end

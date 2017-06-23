@@ -24,9 +24,9 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
   config.sort_order = 'id_asc'
 
-  # controller do
-  #   cache_sweeper :item_sweeper, :only => [:update,:create,:destroy]
-  # end
+  controller do
+    C80Yax::Item.add_observer(C80Yax::ItemObserver.instance)
+  end
 
   # action_item :dublcate_item, :only => :edit do
   #     link_to 'Клонировать', '', class:'dublicate_item'#, method: :post # эта ссылка обработается ajax-ом
