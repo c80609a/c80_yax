@@ -2,10 +2,15 @@ require 'babosa'
 
 class C80Yax::Strsubcat < ActiveRecord::Base
 
+  include C80Yax::Mixins::Strsubcat::Database::Props
+  include C80Yax::Mixins::Strsubcat::Database::PropNamesChanged
+
   validates :title,
             presence: true,
             uniqueness: true,
             length: { in: 6..50 }
+
+  has_and_belongs_to_many :cats
 
   has_many :subordinates,
            class_name: 'C80Yax::Strsubcat',
@@ -14,32 +19,42 @@ class C80Yax::Strsubcat < ActiveRecord::Base
   belongs_to :parent,
              class_name: 'C80Yax::Strsubcat'
 
-  has_and_belongs_to_many :prop_names#,
-                          #:after_add => :after_add_prop_names,
-                          #:after_remove => :after_remove_prop_names
+  has_and_belongs_to_many :prop_names,
+                          :after_add => :after_add_prop_names,
+                          :after_remove => :after_remove_prop_names
 
   has_many :items, :dependent => :destroy
 
-  # has_many :main_props, :dependent => :destroy
-  # accepts_nested_attributes_for :main_props,
-  #                               :reject_if => lambda { |attributes|
-  #                                 !attributes.present?
-  #                               },
-  #                               :allow_destroy => true
-  #
-  # has_many :price_props, :dependent => :destroy
-  # accepts_nested_attributes_for :price_props,
-  #                               :reject_if => lambda { |attributes|
-  #                                 !attributes.present?
-  #                               },
-  #                               :allow_destroy => true
-  #
-  # has_many :common_props, :dependent => :destroy
-  # accepts_nested_attributes_for :common_props,
-  #                               :reject_if => lambda { |attributes|
-  #                                 !attributes.present?
-  #                               },
-  #                               :allow_destroy => true
+  # <editor-fold desc="# PROPS">
+  has_many :main_props, :dependent => :destroy
+  accepts_nested_attributes_for :main_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  has_many :price_props, :dependent => :destroy
+  accepts_nested_attributes_for :price_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  has_many :common_props, :dependent => :destroy
+  accepts_nested_attributes_for :common_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  has_many :prefix_props, :dependent => :destroy
+  accepts_nested_attributes_for :prefix_props,
+                                :reject_if => lambda { |attributes|
+                                  !attributes.present?
+                                },
+                                :allow_destroy => true
+
+  # </editor-fold>
 
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged

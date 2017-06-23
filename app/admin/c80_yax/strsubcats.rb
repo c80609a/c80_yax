@@ -3,16 +3,18 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
 
   menu :label => proc{ I18n.t('c80_yax.active_admin.menu.strsubcat')},
        :parent => 'x_c80_yax',
-       :priority => 1
+       :priority => 2
 
   permit_params :title,
                 :slug,
                 :ord,
                 :parent_id,
-                :prop_name_ids => []#,
-                # :main_props_attributes => [:id, :_destroy, :prop_name_ids => []],
-                # :common_props_attributes => [:id, :_destroy, :prop_name_ids => []],
-                # :price_props_attributes => [:id, :_destroy, :prop_name_ids => []]
+                :cat_ids => [],
+                :prop_name_ids => [],
+                :main_props_attributes => [:id, :_destroy, :prop_name_ids => []],
+                :common_props_attributes => [:id, :_destroy, :prop_name_ids => []],
+                :price_props_attributes => [:id, :_destroy, :prop_name_ids => []],
+                :prefix_props_attributes => [:id, :_destroy, :prop_name_ids => []]
 
   config.sort_order = 'id_asc'
 
@@ -35,37 +37,24 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
   #            }
   #        }
 
-  # controller do
-  #   cache_sweeper :suit_sweeper, :only => [:update,:create,:destroy]
-  # end
+  controller do
+    C80Yax::Strsubcat.add_observer(C80Yax::StrsubcatObserver.instance)
+  end
 
   index do
     selectable_column
     id_column
-    column :ord do |str_sub_cat|
-      editable_text_column str_sub_cat, :ord
-    end
+    column :ord
     column :title
     # column :parent
 
-    column :prop_names do |strsubcat|
-      res = '-'
-      if strsubcat.prop_names.count > 0
-        res = ''
-        strsubcat.prop_names.map do |prop_name|
-          res += "• #{prop_name.title}<br>"
-        end
-      end
-      res.html_safe
+    column :cats do |str_sub_cat|
+      cat_admin_title(str_sub_cat)
     end
 
-    # column :strcats do |str_sub_cat|
-    #   str = '-'
-    #   if str_sub_cat.strcats.count > 0
-    #     str = str_sub_cat.strcats.first.title
-    #   end
-    #   str
-    # end
+    column :prop_names do |strsubcat|
+      all_props_list(strsubcat)
+    end
 
     actions
   end
@@ -75,9 +64,8 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
     f.inputs 'Свойства подкатегории' do
       f.input :title
       f.input :ord
-      f.input :parent,
+      f.input :cats,
               :as => :select,
-              :collection => C80Yax::Strsubcat.where.not(id:f.object.id).map { |s| ["#{s.title}", s.id]},
               :input_html => {
                   :class => 'selectpicker',
                   :title => ' ',
@@ -88,41 +76,110 @@ ActiveAdmin.register C80Yax::Strsubcat, as: 'Strsubcat' do
                   :multiple => false
               },
               :include_blank => true
+
+      # f.input :parent,
+      #         :as => :select,
+      #         :collection => C80Yax::Strsubcat.where.not(id:f.object.id).map { |s| ["#{s.title}", s.id]},
+      #         :input_html => {
+      #             :class => 'selectpicker',
+      #             :title => ' ',
+      #             :data => {
+      #                 :size => '10',
+      #                 :width => '400px'
+      #             },
+      #             :multiple => false
+      #         },
+      #         :include_blank => true
+      #
+
     end
 
-    f.inputs 'Характеристики, которыми описываются товары из этой подкатегории', :class => 'collapsed' do
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_all_props'), :class => 'collapsed' do
       f.input :prop_names, :as => :check_boxes
     end
 
-    # f.inputs "Характеристки, которые выводятся на странице просмотра товара справа от картинки (<a class='poiasn' href='#{image_url('samples/2015_11_22_item_main_props.jpg')}' target='_blank'>например</a>)", :class => 'collapsed-bug fieldset_main_props' do
-    #   f.has_many :main_props, allow_destroy: true do |main_prop|
-    #     main_prop.input :prop_names,
-    #                     :as => :select,
-    #                     :input_html => {:multiple => false},
-    #                     :collection => PropName.includes(:strsubcats).where(:strsubcats => {:id => f.object.id})
-    #
-    #   end
-    # end
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_main_props',
+                    img: image_url('samples/2017_06_20_item_main_props.jpg')).html_safe,
+             :class => 'collapsed fieldset_main_props' do
+      f.has_many :main_props, allow_destroy: true do |main_prop|
+        main_prop.input :prop_names,
+                        :as => :select,
+                        :input_html => {
+                            :class => 'selectpicker',
+                            :title => ' ',
+                            :data => {
+                                :size => '10',
+                                :width => '400px'
+                            },
+                            :multiple => false
+                        },
+                        :collection => f.object.main_props_collection
 
-    # f.inputs "Ценовые характеристики, которые выводятся на странице просмотра товара под картинкой (<a class='poiasn' href='#{image_url('samples/2015_11_22_item_price_props.jpg')}' target='_blank'>пример 1</a>, <a class='poiasn' href='#{image_url('samples/2015_11_22_item_price_props_list.jpg')}' target='_blank'>пример 2</a>)".html_safe, :class => 'collapsed-bug fieldset_price_props' do
-    #   f.has_many :price_props, allow_destroy: true do |price_prop|
-    #     price_prop.input :prop_names,
-    #                     :as => :select,
-    #                     :input_html => {:multiple => false},
-    #                     :collection => PropName.includes(:strsubcats).where(:strsubcats => {:id => f.object.id}).where(:prop_names => {:is_normal_price => 1})
-    #   end
-    # end
+      end
+    end
 
-    # f.inputs "Характеристки, которые выводятся на странице просмотра товара в блоке 'дополнительные характеристики' (<a class='poiasn' href='#{image_url('samples/2015_11_22_item_common_props.jpg')}' target='_blank'>например</a>)", :class => 'collapsed-bug fieldset_common_props' do
-    #   f.has_many :common_props, allow_destroy: true do |common_prop|
-    #     common_prop.input :prop_names,
-    #                      :as => :select,
-    #                      :input_html => {:multiple => false},
-    #                      :collection => PropName.includes(:strsubcats).where(:strsubcats => {:id => f.object.id})
-    #   end
-    # end
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_price_props',
+                    img: image_url('samples/2017_06_20_item_price_props.jpg')).html_safe,
+             :class => 'collapsed fieldset_price_props' do
+      f.has_many :price_props, allow_destroy: true do |price_prop|
+        price_prop.input :prop_names,
+                        :as => :select,
+                         :input_html => {
+                             :class => 'selectpicker',
+                             :title => ' ',
+                             :data => {
+                                 :size => '10',
+                                 :width => '400px'
+                             },
+                             :multiple => false
+                         },
+                        :collection => f.object.price_props_collection
+      end
+    end
+
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_common_props',
+                    img: image_url('samples/2017_06_20_item_common_props.jpg')).html_safe,
+             :class => 'collapsed fieldset_common_props' do
+      f.has_many :common_props, allow_destroy: true do |common_prop|
+        common_prop.input :prop_names,
+                         :as => :select,
+                          :input_html => {
+                              :class => 'selectpicker',
+                              :title => ' ',
+                              :data => {
+                                  :size => '10',
+                                  :width => '400px'
+                              },
+                              :multiple => false
+                          },
+                         :collection => f.object.common_props_collection
+      end
+    end
+
+    f.inputs I18n.t('c80_yax.active_admin.pages.strsubcat.label_prefix_props',
+                    img: image_url('samples/2017-06-21_item_prefix_props.jpg')),
+             :class => 'collapsed fieldset_common_props' do
+      f.has_many :prefix_props, allow_destroy: true do |prefix_prop|
+        prefix_prop.input :prop_names,
+                          :as => :select,
+                          :input_html => {
+                              :class => 'selectpicker',
+                              :title => ' ',
+                              :data => {
+                                  :size => '10',
+                                  :width => '400px'
+                              },
+                              :multiple => false
+                          },
+                          :collection => f.object.prefix_props_collection
+      end
+    end
 
     f.actions
+  end
+
+  show do
+    render 'view', { s: strsubcat }
   end
 
 end

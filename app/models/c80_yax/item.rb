@@ -2,6 +2,8 @@ require 'babosa'
 
 class C80Yax::Item < ActiveRecord::Base
 
+  include C80Yax::Mixins::Item::Database::Props
+
   validates :title,
             presence: true,
             uniqueness: true,
@@ -10,7 +12,7 @@ class C80Yax::Item < ActiveRecord::Base
   validates :strsubcat,
             presence: true
 
-  # has_and_belongs_to_many :vendors
+  has_and_belongs_to_many :vendors
   belongs_to :strsubcat
 
   has_many :iphotos, :dependent => :destroy

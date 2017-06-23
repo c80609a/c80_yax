@@ -1,0 +1,11 @@
+.add_to_bucket {
+  @include color_button(#FFFFFF, $red);
+
+  line-height: 35px;
+  font-size: 25px;
+  text-transform: uppercase;
+  text-align: center;
+
+  // TODO-1:: добавить иконку корзины
+
+}

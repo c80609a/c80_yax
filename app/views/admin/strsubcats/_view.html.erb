@@ -1,0 +1,40 @@
+<table class="index_table">
+
+  <thead>
+    <tr>
+      <th colspan="3"><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_view_title') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= I18n.t('activerecord.attributes.c80_yax/strsubcat.cats') %></td>
+      <td><%= cat_admin_title(s) %></td>
+    </tr>
+    <tr>
+      <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_all_props') %></td>
+      <td><%= all_props_list(s) %></td>
+    </tr>
+    <tr>
+      <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_main_props',
+                     img: image_url('samples/2017_06_20_item_main_props.jpg')).html_safe %></td>
+      <td><%= main_props_list(s) %></td>
+    </tr>
+    <tr>
+      <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_price_props',
+                     img: image_url('samples/2017_06_20_item_price_props.jpg')).html_safe %></td>
+      <td><%= price_props_list(s) %></td>
+    </tr>
+    <tr>
+      <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_common_props',
+                     img: image_url('samples/2017_06_20_item_common_props.jpg')).html_safe %></td>
+      <td><%= common_props_list(s) %></td>
+    </tr>
+    <tr>
+      <td><%= I18n.t('c80_yax.active_admin.pages.strsubcat.label_prefix_props',
+                     img: image_url('samples/2017-06-21_item_prefix_props.jpg')).html_safe %></td>
+      <td><%= prefix_props_list(s) %></td>
+    </tr>
+  </tbody>
+
+</table>

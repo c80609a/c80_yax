@@ -1,9 +1,9 @@
 # категории строительных материалов
 ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
-  menu :label => proc { I18n.t('c80_yax.active_admin.menu.item') },
+  menu :label => proc {I18n.t('c80_yax.active_admin.menu.item')},
        :parent => 'x_c80_yax',
-       :priority => 2
+       :priority => 3
 
 
   permit_params :title,
@@ -17,16 +17,16 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :is_available,
                 :strsubcat_id,
                 :iphotos_attributes => [:id, :image, :_destroy],
-                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id]#,
-  # :vendor_ids => [],
+                :item_props_attributes => [:value, :_destroy, :prop_name_id, :id],
+                :vendor_ids => []
   # :gallery_ids => [],
   # :related_child_ids => []
 
   config.sort_order = 'id_asc'
 
-  # controller do
-  #   cache_sweeper :item_sweeper, :only => [:update,:create,:destroy]
-  # end
+  controller do
+    C80Yax::Item.add_observer(C80Yax::ItemObserver.instance)
+  end
 
   # action_item :dublcate_item, :only => :edit do
   #     link_to 'Клонировать', '', class:'dublicate_item'#, method: :post # эта ссылка обработается ajax-ом
@@ -35,34 +35,27 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
   index do
     selectable_column
     id_column
-    
+
     column :iphotos do |item|
-      r = ''
-      if item.iphotos.count > 0
-        r = link_to image_tag(item.iphotos.first.image.thumb_md,
-                              style: 'width:150px'),
-                    item.iphotos.first.image.url,
-                    target: '_blank'
-        r = "#{r}<br>Всего фотографий: #{item.iphotos.count}".html_safe
-      end
-      r
+      item_photos_short(item)
     end
-    
+
     column :title
+    column :strsubcat
     column :is_hit
     column :is_sale
     column :is_main
     # column :is_ask_price
 
-    # column 'Бренд' do |itm|
-    #   str = '-'
-    #   if itm.vendors.count > 0
-    #     str = itm.vendors.first.title
-    #   end
-    #   str
-    # end
+    column :vendors do |itm|
+      print_vendor(itm)
+    end
 
     actions
+  end
+
+  index as: :grid do |product|
+    product
   end
 
   form(:html => {:multipart => true}) do |f|
@@ -71,7 +64,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       f.input :title
       f.input :strsubcat,
               :as => :select,
-              :collection => C80Yax::Strsubcat.all.map { |s| [s.title, s.id] },
+              :collection => C80Yax::Strsubcat.all.map {|s| [s.title, s.id]},
               :input_html => {
                   :title => '',
                   :class => 'selectpicker',
@@ -95,13 +88,22 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       # https://github.com/justinfrench/formtastic
       f.has_many :iphotos, :allow_destroy => true do |iph|
         iph.input :image,
-                 :as => :file,
-                 :hint => image_tag(iph.object.image.thumb_md)
+                  :as => :file,
+                  :hint => image_tag(iph.object.image.thumb_md)
       end
 
       f.input :full_desc, :as => :ckeditor, :input_html => {:style => 'height:500px', rows: 20}
-      # f.input :vendors, :as => :select, :input_html => {:multiple => false}, :include_blank => true
-
+      f.input :vendors,
+              :as => :select,
+              :input_html => {
+                  :title => '',
+                  :class => 'selectpicker',
+                  :data => {
+                      :size => 10
+                  },
+                  :multiple => false
+              },
+              :include_blank => true
 
     end
 
@@ -123,6 +125,10 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     # end
 
     f.actions
+  end
+
+  show do
+    render_show_item(item)
   end
 
 end

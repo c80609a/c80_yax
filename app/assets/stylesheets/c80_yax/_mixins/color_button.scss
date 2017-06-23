@@ -1,0 +1,31 @@
+@mixin color_button($color: #ffffff, $bg_color: #3190e7) {
+  display: inline-block;
+  position: relative;
+
+  /*font-family: "Open Sans" !important;*/
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration: none !important;
+  text-shadow: none;
+  color: $color !important;
+
+  border: 1px solid $bg_color !important;
+  border-radius: 3px !important;
+  padding: 13px 15px;
+  margin: 0;
+  background: $bg_color;
+  box-shadow: none;
+
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: darken($bg_color, 10%) !important;
+    background-image: none !important;
+    color: lighten($color, 10%) !important;
+  }
+}
