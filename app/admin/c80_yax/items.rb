@@ -37,7 +37,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     id_column
 
     column :iphotos do |item|
-      iphotos_short_view(item)
+      item_photos_short(item)
     end
 
     column :title
