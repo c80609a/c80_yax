@@ -47,7 +47,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     column :is_main
     # column :is_ask_price
 
-    column :vendor do |itm|
+    column :vendors do |itm|
       print_vendor(itm)
     end
 
