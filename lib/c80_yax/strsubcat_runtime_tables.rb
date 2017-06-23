@@ -372,8 +372,9 @@ class StrsubcatRuntimeTables
     end
 
     # из таблицы типа strcat_111_items удалить строку, описывающую вещь item_id
-    def strh_item_drop(strsubcat_id,item_id)
-      runtime_table_name = "strcat_#{strsubcat_id}_items"
+    def self.item_drop(strsubcat_id, item_id) # strh_item_drop
+      runtime_table_name = "c80_yax_strcat_#{strsubcat_id}_items"
+      Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.item_drop> Удаляем вещь id = #{item_id} из таблицы `#{runtime_table_name}`."
       if ActiveRecord::Base.connection.table_exists?(runtime_table_name)
         sql = "
         DELETE FROM #{runtime_table_name}

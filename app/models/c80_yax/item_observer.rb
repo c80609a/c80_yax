@@ -21,7 +21,7 @@ module C80Yax
     # • (средствами рельсы) из таблицы item_props должны исчезнуть свойства этой вещи
     # • из таблицы типа str_111_items должна исчезнуть строка, описывающая эту вещь
     def after_destroy(item)
-      # strh_item_drop(item.strsubcat.id, item.id)
+      StrsubcatRuntimeTables.item_drop(item.strsubcat.id, item.id)
     end
 
 
