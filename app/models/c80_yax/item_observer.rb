@@ -14,7 +14,7 @@ module C80Yax
     #
     def after_update(item)
       Rails.logger.debug "[TRACE] <ItemObserver.after_update> item.title = #{item.title}"
-      # strh_item_update(item.strsubcat.id,item.id)
+      StrsubcatRuntimeTables.item_update(item.strsubcat.id,item.id)
     end
 
     # Админ удаляет вещь:

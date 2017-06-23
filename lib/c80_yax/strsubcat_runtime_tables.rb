@@ -1,10 +1,11 @@
 # В задачи класса входят:
 #
-#     * создавать\удалять\заполнять таблицы вида `c80_yax_strcat_#{NN}_items"
+#     * создавать
+#     * уничтожать
+#     * заполнять
+#     * обновлять записи
 #
-#
-#
-#
+#     таблиц вида `c80_yax_strcat_#{NN}_items".
 
 class StrsubcatRuntimeTables
 
@@ -35,7 +36,7 @@ class StrsubcatRuntimeTables
 
       # <editor-fold desc="# составляем и выполняем sql запрос">
 
-      # NOTE:: [columns] эти столбцы должны соответствовать
+      # NOTE:: [columns] эти столбцы должны соответствовать (запрос при заполнении таблицы)
 
       sql = "
             SELECT
@@ -385,52 +386,57 @@ class StrsubcatRuntimeTables
       end
     end
 
-=begin
     # в таблице типа strcat_111_items обновить поля строки, описывающую вещь item_id
-    def strh_item_update(strsubcat_id,item_id)
-      Rails.logger.debug "[TRACE] <strh_item_update> В таблице strcat_#{strsubcat_id}_items обновим данные о товаре item_id = #{item_id}"
-      # сначала соберём все свойства вещи
+    def self.item_update(strsubcat_id,item_id) # strh_item_update
+      runtime_table_name = "c80_yax_strcat_#{strsubcat_id}_items"
+      Rails.logger.debug "[TRACE] <StrsubcatRuntimeTables.item_update> В таблице `#{runtime_table_name}` обновим данные о товаре id = #{item_id}."
+
+      # <editor-fold desc="# сначала соберём все свойства вещи">
+      # NOTE:: [columns] эти столбцы должны соответствовать (запрос при обновлении предмета)
       sql = "
-    SELECT
-      item_props.prop_name_id,
-      prop_names.title AS prop_name_title,
-      item_props.value,
-      items.id AS item_id,
-      items.title as item_title,
-      items.is_main,
-      items.is_hit,
-      items.is_sale,
-      strsubcats.id AS strsubcat_id,
-      strsubcats.slug AS strsubcat_slug,
-      vendors.id as vendor_id,
-      vendors.title as vendor_title,
-      items.full_desc,
-      items.image,
-      items.is_ask_price
-    FROM `items`
-      INNER JOIN `strsubcats` ON `strsubcats`.`id` = `items`.`strsubcat_id`
-      LEFT JOIN `item_props` ON `item_props`.`item_id` = `items`.`id`
-      LEFT JOIN prop_names ON prop_names.id = item_props.prop_name_id
-      LEFT JOIN items_vendors ON items_vendors.item_id = `items`.`id`
-      LEFT JOIN vendors ON vendors.id = `items_vendors`.`vendor_id`
-    WHERE (strsubcats.id = #{strsubcat_id})
-    AND items.id = #{item_id};
-    "
+            SELECT
+              `c80_yax_item_props`.`prop_name_id`,
+              `c80_yax_prop_names`.`title` AS prop_name_title,
+              `c80_yax_item_props`.`value`,
+              `c80_yax_items`.`id` AS item_id,
+              `c80_yax_items`.`title` as item_title,
+              `c80_yax_items`.`is_main`,
+              `c80_yax_items`.`is_hit`,
+              `c80_yax_items`.`is_sale`,
+              `c80_yax_strsubcats`.`id` AS strsubcat_id,
+              `c80_yax_strsubcats`.`slug` AS strsubcat_slug,
+              `c80_yax_vendors`.`id` as vendor_id,
+              `c80_yax_vendors`.`title` as vendor_title,
+              `c80_yax_items`.`full_desc`,
+              `c80_yax_items`.`image`,
+              `c80_yax_items`.`is_ask_price`,
+              `c80_yax_items`.`is_gift`,
+              `c80_yax_items`.`is_starting`,
+              `c80_yax_items`.`is_available`
+            FROM `c80_yax_items`
+              INNER JOIN `c80_yax_strsubcats` ON `c80_yax_strsubcats`.`id` = `c80_yax_items`.`strsubcat_id`
+              LEFT JOIN `c80_yax_item_props` ON `c80_yax_item_props`.`item_id` = `c80_yax_items`.`id`
+              LEFT JOIN `c80_yax_prop_names` ON `c80_yax_prop_names`.`id` = `c80_yax_item_props`.`prop_name_id`
+              LEFT JOIN `c80_yax_items_vendors` ON `c80_yax_items_vendors`.`item_id` = `c80_yax_items`.`id`
+              LEFT JOIN `c80_yax_vendors` ON `c80_yax_vendors`.`id` = `c80_yax_items_vendors`.`vendor_id`
+            WHERE (`c80_yax_strsubcats`.`id` = #{strsubcat_id})
+            AND `c80_yax_items`.`id` = #{item_id};
+      "
       records = ActiveRecord::Base.connection.execute(sql)
+      # </editor-fold>
 
       # составим SQL команду
-      hash_sql = self.hash_sql_make(records,strsubcat_id)
+      hash_sql = self.hash_sql_make(records, strsubcat_id)
 
       #-> удалим старую строку
-      sql = "DELETE FROM `strcat_#{strsubcat_id}_items` WHERE item_id = #{item_id}"
+      sql = "DELETE FROM `#{runtime_table_name}` WHERE item_id = #{item_id}"
       ActiveRecord::Base.connection.execute(sql)
 
       #-> выполним SQL команду : вставим строку с обновлёнными значениями
-      hash_sql_execute(hash_sql)
+      self.hash_sql_execute(hash_sql)
 
-      Rails.logger.debug "[TRACE] <strh_item_update> END"
+      Rails.logger.debug '[TRACE] <StrsubcatRuntimeTables.strh_item_update> END'
     end
-=end
 
 =begin
     # выдать строку, описывающую товар с id=item_id из подкатегории id=strsubcat_id
