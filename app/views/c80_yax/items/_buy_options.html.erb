@@ -1,0 +1,9 @@
+<% elems.each do |elem| %>
+    <div class="checkbox <%=elem[:style]%>">
+      <label>
+        <input type="checkbox" value="<%=elem[:value]%>" checked>
+        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+        <%= elem[:label].html_safe %>
+      </label>
+    </div>
+<% end %>
