@@ -2,6 +2,8 @@ require 'babosa'
 
 class C80Yax::Item < ActiveRecord::Base
 
+  include C80Yax::Mixins::Item::Database::Props
+
   validates :title,
             presence: true,
             uniqueness: true,
