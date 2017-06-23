@@ -9,9 +9,27 @@ module C80Yax
 
         module ClassMethods
 
+          # Выдать стуктуру, годную для обработки для view,
+          # в которой содержатся данные характеристиках предмета.
+          # +strsubcat_id+ подкатегория, которой принадлежит Товар
+          # +item_as_hash+ это результат запроса к runtime таблице
+
+          def get_props_parsed(strsubcat_id, item_as_hash)
+            rows = self.__select_props(strsubcat_id)
+            self.__parse_sql_props(rows, item_as_hash)
+          end
+
+          protected
+
+          # сервисный метод. переопределится в классе
+          # noinspection RubyUnusedLocalVariable
+          def __select_props(strsubcat_id)
+
+          end
+
           # сервисный метод. Парсит результат sql запросов
           # в структуру, подходящую для view
-          def parse_sql_props(rows, item_as_hash)
+          def __parse_sql_props(rows, item_as_hash)
 
             result = {
                 titles: [],
