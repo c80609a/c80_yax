@@ -4,8 +4,8 @@ module C80Yax
 
     # Админ создаёт вещь:
     #   • в таблице типа str_111_items должна появиться строка, описывающая эту вещь
-    def after_create(item)
-      Rails.logger.debug "[TRACE] <ItemObserver.after_create> Создан предмет '#{item.title}'."
+    def after_commit(item)
+      Rails.logger.debug "[TRACE] <ItemObserver.after_commit> Создан предмет '#{item.title}'."
       StrsubcatRuntimeTables.table_check_and_build(item.strsubcat)
       StrsubcatRuntimeTables.table_fill(item.strsubcat.id) # TODO-5:: оптимизировать: не надо совершать операцию "заполнить таблицу", надо совершить операцию "вставлять в таблицу строку"
     end
