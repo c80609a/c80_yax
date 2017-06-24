@@ -16,6 +16,7 @@ module C80Yax
     # +--------------+--------------+--------------+---------------------------+-----------+
 
     def self.select_props_sql(strsubcat_id)
+      Rails.logger.debug "[TRACE] <MainProp.select_props_sql> strsubcat_id = #{strsubcat_id}"
       sql = "
       SELECT
         c80_yax_main_props.strsubcat_id,

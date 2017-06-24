@@ -16,6 +16,7 @@ module C80Yax
 
           # сформировать список main свойств предмета
           def main_props
+            Rails.logger.debug '[TRACE] <Item::Database.main_props>'
             C80Yax::MainProp.get_props_parsed(self.strsubcat_id, item_as_hash)
           end
 
