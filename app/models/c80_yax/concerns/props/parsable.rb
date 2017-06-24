@@ -15,6 +15,7 @@ module C80Yax
           # +item_as_hash+ это результат запроса к runtime таблице
 
           def get_props_parsed(strsubcat_id, item_as_hash)
+            Rails.logger.debug "[TRACE] <Parsable.get_props_parsed> self.name = #{self.name}, item_as_hash: #{item_as_hash}"
             rows = self.select_props_sql(strsubcat_id)
             meth =  (self.name == 'C80Yax::PriceProp') ? '__parse_sql_price_props' : '__parse_sql_props'
             self.send(meth, rows, item_as_hash)
@@ -41,12 +42,15 @@ module C80Yax
                 uoms:   []
             }
 
+            if item_as_hash.size.zero?
+              Rails.logger.debug '[ERROR] <Parsable.__parse_sql_props> item_as_hash пуст.'
+              return result
+            end
+
             rows.each(:as => :hash) do |row|
-
               result[:titles] << row['title']
-              result[:values] << item_as_hash['prop_'+row['prop_name_id'].to_s]
+              result[:values] << item_as_hash["prop_#{row['prop_name_id']}"]
               result[:uoms] << row['uom_title']
-
             end
 
             result
@@ -66,13 +70,18 @@ module C80Yax
           # }
 
           def __parse_sql_price_props(rows, item_as_hash)
-
+            Rails.logger.debug '[TRACE] <Parsable.__parse_sql_price_props>'
             result = {
                 titles:     [],
                 values:     [],
                 values_old: [],
                 uoms:       []
             }
+
+            if item_as_hash.size.zero?
+              Rails.logger.debug '[ERROR] <Parsable.__parse_sql_props> item_as_hash пуст.'
+              return result
+            end
 
             rows.each(:as => :hash) do |row|
 
