@@ -8,6 +8,7 @@ ActiveAdmin.register C80Yax::Cat, as: 'Cat' do
   permit_params :title,
                 :slug,
                 :ord,
+                :image,
                 :strsubcat_ids => []
 
   config.batch_actions = false
@@ -18,7 +19,9 @@ ActiveAdmin.register C80Yax::Cat, as: 'Cat' do
     id_column
     column :ord
     column :title
-
+    column :image do |cat|
+      cat_image(cat)
+    end
     column :strsubcats do |cat|
       res = '-'
       if cat.strsubcats.count > 0
@@ -38,6 +41,7 @@ ActiveAdmin.register C80Yax::Cat, as: 'Cat' do
     f.inputs 'Свойства категории' do
       f.input :title
       f.input :ord
+      f.input :image, :as => :file, :hint => cat_image(f.object)
       f.input :strsubcats, :as => :check_boxes
     end
 
