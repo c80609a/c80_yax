@@ -5,6 +5,9 @@ module C80Yax
 
     process :resize_to_limit => [1024,768]
 
+    # накладываем watermark
+    process :watermark => [Rails.root.join('public/watermark.png')]
+
     version :thumb_sm do
       begin
         p = C80Yax::Prop.first
@@ -30,6 +33,11 @@ module C80Yax
       rescue => e
         Rails.logger.debug "[TRACE] <iphoto_uploader.thumb_lg> [ERROR] #{e}"
       end
+    end
+
+    def watermark(watermark_image, options={})
+      cache_stored_file! unless cached?
+      C80Yax::Watermarker.new(current_path, watermark_image).watermark!(options)
     end
 
     def store_dir

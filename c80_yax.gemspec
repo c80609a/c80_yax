@@ -25,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "byebug"
   spec.add_dependency 'activesupport', ['>= 3.0.0']
   spec.add_dependency 'rails-observers'
+  spec.add_dependency 'mini_magick'
 
 end
