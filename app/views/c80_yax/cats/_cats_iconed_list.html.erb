@@ -1,0 +1,35 @@
+<%
+  # Квадратные кнопки категорий
+  #
+  # k - счётчик элементов в строке, для того, чтобы симулировать last-child селектор: у каждого 4-го элемента (последнего в строке) убираем margin справа
+  #
+%>
+<div class="cats_iconed_list">
+  <ul>
+
+    <% cats.each_with_index do |cat, index| %>
+        <% k = index % 4 %>
+        <li class="child-<%=k+1%>th">
+
+          <%= link_to "#{cat_normal_url(cat)}",
+                      :title => cat.title,
+                      :class => 'a_cat_nav',
+                      :id => "a_#{cat.slug}",
+                      :role => 'button',
+                      :tabindex => index,
+                      :data => {
+                          :cat_slug => cat.slug,
+                          # :html => true,
+                          # :toggle => 'popover',
+                          # :trigger => 'click'
+                      } do %>
+              <span class="icon" style="background: transparent url(<%= cat_image_url(cat) %>) no-repeat 50% 50%;"></span>
+              <span class="title"><%= cat.title %></span>
+          <% end %>
+
+        </li>
+
+    <% end %>
+
+  </ul>
+</div>

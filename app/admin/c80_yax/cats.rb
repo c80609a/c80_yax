@@ -20,7 +20,7 @@ ActiveAdmin.register C80Yax::Cat, as: 'Cat' do
     column :ord
     column :title
     column :image do |cat|
-      cat_image(cat)
+      cat_image_tag(cat)
     end
     column :strsubcats do |cat|
       res = '-'
@@ -41,7 +41,7 @@ ActiveAdmin.register C80Yax::Cat, as: 'Cat' do
     f.inputs 'Свойства категории' do
       f.input :title
       f.input :ord
-      f.input :image, :as => :file, :hint => cat_image(f.object)
+      f.input :image, :as => :file, :hint => cat_image_tag(f.object)
       f.input :strsubcats, :as => :check_boxes
     end
 

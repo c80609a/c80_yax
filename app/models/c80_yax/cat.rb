@@ -3,6 +3,8 @@ require 'babosa'
 module C80Yax
   class Cat < ActiveRecord::Base
 
+    include C80Yax::Mixins::Cat::Database
+
     validates :title,
               presence: true,
               uniqueness: true,
@@ -21,8 +23,6 @@ module C80Yax
     def normalize_friendly_id(input)
       input.to_s.to_slug.normalize(transliterations: :russian).to_s
     end
-
-    scope :menu_order, -> {order(:ord => :asc)}
 
   end
 
