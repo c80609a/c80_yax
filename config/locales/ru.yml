@@ -6,6 +6,7 @@ ru:
           strsubcat: 'Подкатегории'
           cat: 'Категории'
           item: 'Товары'
+          color: 'Цвета'
         pages:
           strsubcat:
             label_view_title: 'Настройки подкатегории'

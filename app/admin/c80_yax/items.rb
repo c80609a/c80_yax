@@ -18,7 +18,8 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :strsubcat_id,
                 :iphotos_attributes => [:id, :image, :_destroy],
                 :item_props_attributes => [:value, :_destroy, :prop_name_id, :id],
-                :vendor_ids => []
+                :vendor_ids => [],
+                :color_ids => []
   # :gallery_ids => [],
   # :related_child_ids => []
 
@@ -50,6 +51,8 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     column :vendors do |itm|
       print_vendor(itm)
     end
+
+    column :colors
 
     actions
   end
@@ -104,7 +107,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                   :multiple => false
               },
               :include_blank => true
-
+      f.input :colors, :as => :check_boxes
     end
 
     f.inputs 'Характеристики' do
