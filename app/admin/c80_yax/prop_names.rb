@@ -1,7 +1,7 @@
 # категории строительных материалов
 ActiveAdmin.register C80Yax::PropName, as: 'PropName' do
 
-  menu :label => 'Имена свойств',
+  menu :label => proc{ I18n.t('c80_yax.active_admin.menu.prop_name')},
        :parent => 'x_c80_yax',
        :priority => 6
 

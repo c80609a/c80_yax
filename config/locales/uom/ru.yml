@@ -1,0 +1,15 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          uom: 'Единицы измерения'
+  activerecord:
+    models:
+      uom:
+        one: 'единицу измерения'
+        other: 'Единицы измерения'
+    attributes:
+      c80_yax/uom:
+        title: 'Название'
+        comment: 'Комментарий'
+        is_number: 'Является числом?'

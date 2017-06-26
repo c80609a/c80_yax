@@ -1,0 +1,16 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          color: 'Цвета'
+  activerecord:
+    models:
+      color:
+        one: 'цвет'
+        other: 'Цвета'
+    attributes:
+      c80_yax/color:
+        title: 'Название'
+        value: 'Значение'
+        skidka: 'Алгоритм скидки'
+        items: 'Назначен товарам'
