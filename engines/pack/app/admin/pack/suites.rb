@@ -6,7 +6,8 @@ ActiveAdmin.register Pack::Suite, as: 'Suite' do
 
   permit_params :title,
                 :where,
-                :url
+                :url,
+                :srows_attributes => [:id, :_destroy, :item_id, :ord]
 
   config.batch_actions = false
   config.sort_order = 'id_asc'
@@ -27,6 +28,25 @@ ActiveAdmin.register Pack::Suite, as: 'Suite' do
       f.input :title
       f.input :where
       f.input :url
+
+      f.inputs 'Товары' do
+        f.has_many :srows, allow_destroy: true do |srow|
+          srow.input :ord
+          srow.input :item,
+                     :as => :select,
+                     :input_html => {
+                         :title => '',
+                         :class => 'selectpicker',
+                         :data => {
+                             :size => 10,
+                             :width => '500px'
+                         },
+                         :multiple => false
+                     },
+                     :collection => C80Yax::Item.all.map { |o| ["#{o.title}", o.id]}
+        end
+      end
+
     end
 
     f.actions

@@ -3,7 +3,7 @@ module Pack
     isolate_namespace Pack
 
     initializer :pack_engine do
-      byebug
+      # byebug
       if defined?(ActiveAdmin)
         ActiveAdmin.application.load_paths += Dir["#{config.root}/app/helpers/**/"]
         ActiveAdmin.application.load_paths += Dir["#{config.root}/app/models/**/"]
@@ -12,7 +12,7 @@ module Pack
     end
 
     initializer :append_migrations do |app|
-      byebug
+      # byebug
       unless app.root.to_s.match root.to_s
         config.paths['db/migrate'].expanded.each do |expanded_path|
           app.config.paths['db/migrate'] << expanded_path
