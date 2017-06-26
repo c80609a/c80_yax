@@ -1,6 +1,16 @@
 # Описание
 
-Добавляем возможность создавать т.н. "Выдачи товаров" - `Packs`.
+Добавляем возможность создавать т.н. "Выдачи товаров" - `Suites`.
+
+* Suite:
+    * + title:string, null: false
+    * has_many srows:
+        * ord:integer, null: false, default: 10
+        * belongs_to :suite
+        * belongs_to :item
+    * + where:string, default: 'before' # before, after
+    * + url:string 
+        
 
 # Цитата из ТЗ
 
