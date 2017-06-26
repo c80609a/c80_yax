@@ -1,0 +1,20 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          cat: 'Категории'
+  activerecord:
+    models:
+      cat:
+        one: 'категорию'
+        other: 'Категории'
+    attributes:
+      c80_yax/cat:
+        id: 'id'
+        ord: 'Порядковый №'
+        title: 'Название'
+        slug: 'Friendly URL'
+        image: 'Изображение'
+        strsubcats: 'Подкатегории'
+        created_at: 'Дата создания'
+        updated_at: 'Обновлено'

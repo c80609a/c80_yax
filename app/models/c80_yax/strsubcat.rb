@@ -11,6 +11,7 @@ class C80Yax::Strsubcat < ActiveRecord::Base
             length: { in: 6..50 }
 
   has_and_belongs_to_many :cats
+  public_constant :HABTM_Cats
 
   has_many :subordinates,
            class_name: 'C80Yax::Strsubcat',
@@ -22,6 +23,7 @@ class C80Yax::Strsubcat < ActiveRecord::Base
   has_and_belongs_to_many :prop_names,
                           :after_add => :after_add_prop_names,
                           :after_remove => :after_remove_prop_names
+  public_constant :HABTM_PropNames
 
   has_many :items, :dependent => :destroy
 

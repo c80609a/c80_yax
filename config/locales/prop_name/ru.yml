@@ -1,0 +1,15 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          prop_name: 'Имена свойств'
+  activerecord:
+    models:
+      prop_name:
+        one: 'Имя свойства'
+        other: 'Имена свойств'
+    attributes:
+      c80_yax/prop_name:
+        title: 'Название'
+        uom: 'Ед. измерения'
+        related: 'Старая цена'

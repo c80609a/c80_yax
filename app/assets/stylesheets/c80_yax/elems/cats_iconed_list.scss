@@ -1,0 +1,73 @@
+$cat_icon_width: 290px;
+$cat_icon_height: 240px;
+
+//noinspection SassScssUnresolvedMixin
+div.cats_iconed_list {
+  @include clearfix;
+  margin: 15px;
+
+  > ul {
+    @include clearfix;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    /*width: 857px;*/
+    position: relative;
+
+    > li {
+      float: left;
+      /*margin-right: 59px;*/
+      &.child-4th { margin-right:0; }
+
+      > a {
+        display: block;
+        width: $cat_icon_width;
+        height: $cat_icon_height;
+        /*background: transparent url(image_path('strcat_button_bg.png')) no-repeat 0 0;*/
+        position: relative;
+        text-decoration: none !important;
+        outline: none;
+
+        span {
+          position: absolute;
+          display: block;
+          width: 100%;
+          text-decoration: none !important;
+
+          &.icon {
+            width: $cat_icon_width;
+            height: $cat_icon_height;
+          }
+
+          &.title {
+            bottom: 15px;
+            text-align: center;
+            padding: 0 30px;
+            color: #000000;
+            /*font-family: pf_din_text_cond_pro_boldRg, monospace, monospace;*/
+            font-weight: normal !important;
+            font-size: 12px;
+            text-transform: uppercase;
+          }
+
+        }
+
+        &:hover {
+          text-decoration: none !important;
+          span { text-decoration: none !important; }
+        }
+
+        &.active {
+        }
+
+        &:focus {
+          text-decoration: none !important;
+          span { text-decoration: none !important; }
+        }
+
+      }
+
+    }
+
+  }
+}

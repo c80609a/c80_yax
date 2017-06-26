@@ -1,0 +1,28 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          item: 'Товары'
+  activerecord:
+    models:
+      item:
+        one: 'товар'
+        other: 'Товары'
+    attributes:
+      c80_yax/item:
+        id: 'id'
+        title: 'Название'
+        short_desc: 'Краткое описание'
+        full_desc: 'Подробное описание'
+        is_hit: 'Хит'
+        is_sale: 'Акция'
+        is_main: 'Выводить на главной'
+        is_gift: 'Подарочный набор'
+        is_starting: 'Стартовый набор'
+        is_available: 'В наличии'
+        strsubcat: 'Подкатегория'
+        cat: 'Категория'
+        related_parent: 'related_parent'
+        related_childs: 'related_childs'
+        iphotos: 'Фото'
+        colors: 'Цвет'

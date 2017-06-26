@@ -2,6 +2,7 @@ module C80Yax
   class MainProp < ActiveRecord::Base
     belongs_to :strsubcat
     has_and_belongs_to_many :prop_names
+    public_constant :HABTM_PropNames
 
     include C80Yax::Concerns::Props::Parsable
 
