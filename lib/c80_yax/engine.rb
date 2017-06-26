@@ -1,6 +1,7 @@
 module C80Yax
   class Engine < ::Rails::Engine
     config.autoload_paths += %W(#{config.root}/app/models/c80_yax/concerns)
+    config.i18n.load_path += Dir[config.root.join('config', 'locales', '*','*.{yml}').to_s]
     isolate_namespace C80Yax
 
     initializer :c80_yax_engine do

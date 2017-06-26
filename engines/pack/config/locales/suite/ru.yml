@@ -1,0 +1,15 @@
+ru:
+  c80_yax:
+    active_admin:
+        menu:
+          suite: 'Выдачи'
+  activerecord:
+    models:
+      suite:
+        one: 'выдачу'
+        other: 'Выдачи'
+    attributes:
+      pack/suite:
+        title: 'Название'
+        where: 'Место на странице'
+        url: 'Выводится на страницах'

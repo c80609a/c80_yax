@@ -8,7 +8,7 @@ var f_new = function (){
     init_select_picker();
 };
 
-C80_YAX.strsubcats = {
+C80_YAX.suites = {
     edit: f_edit,
     "new": f_new
 };

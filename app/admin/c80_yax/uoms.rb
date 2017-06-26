@@ -1,7 +1,7 @@
 # единицы измерения
 ActiveAdmin.register C80Yax::Uom, as: 'Uom' do
 
-  menu :label => 'Единицы измерения',
+  menu :label => proc{ I18n.t('c80_yax.active_admin.menu.uom')},
        :parent => 'x_c80_yax',
        :priority => 7
 
