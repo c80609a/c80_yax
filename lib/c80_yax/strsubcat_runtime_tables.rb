@@ -346,7 +346,7 @@ class StrsubcatRuntimeTables
           LEFT JOIN `c80_yax_item_props` ON `c80_yax_item_props`.`item_id` = `c80_yax_items`.`id`
           LEFT JOIN `c80_yax_prop_names` ON `c80_yax_prop_names`.`id` = `c80_yax_item_props`.`prop_name_id`
         WHERE `c80_yax_strsubcats`.`id` = #{ strsubcat.id }
-        AND `c80_yax_prop_name_id` IN (#{ list.join(',')})
+        AND `prop_name_id` IN (#{ list.join(',')})
       "
 
         records = ActiveRecord::Base.connection.execute(sql)
