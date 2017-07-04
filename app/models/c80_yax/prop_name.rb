@@ -28,5 +28,10 @@ module C80Yax
     # validates_with PropNameValidator
     # TODO:: добавить валидацию title на уникальность и длину
 
+    def uom_title
+      return uom.title if uom.present?
+      ''
+    end
+
   end
 end

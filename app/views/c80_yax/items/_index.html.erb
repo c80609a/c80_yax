@@ -1,0 +1,17 @@
+<ul class="item_index">
+  <% items.each do |item| %>
+      <li class="li_item i_<%= item.id%>">
+        <%= item.main_image(thumb_size) %>
+        <%= item.h3_title(thumb_size) %>
+        <%= item.div_prices %>
+        <%= item.btn_order %>
+      </li>
+  <% end %>
+</ul>
+
+<div class="will_paginate">
+  <%= will_paginate(will_paginate_items,
+                    :previous_label => '<',
+                    :next_label => '>',
+                    :inner_window => 3) unless without_paginator %>
+</div>
