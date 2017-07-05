@@ -7,7 +7,10 @@ module C80Yax
       "/katalog/#{model.strsubcat.slug}/#{model.id}"
     end
 
-    def main_image(thumb_size = 'thumb_md')
+    def main_image(thumb_size = 'thumb_md', options = {})
+
+      rel = options.fetch(:rel, 'follow')
+      a_href = options.fetch(:a_href, my_url)
 
       ww = fetch_ww(thumb_size)
       hh = fetch_hh(thumb_size)
@@ -16,7 +19,8 @@ module C80Yax
                                    :alt_image => model.title,
                                    # :image => main_image_tag(thumb_size),
                                    :image => self.fetch_first_photo(thumb_size),
-                                   :a_href => my_url,
+                                   :a_href => a_href,
+                                   :rel => rel,
                                    :a_class => 'item_main_image',
                                    :a_css_style => "width:#{ww}px;height:#{hh}px",
                                    :image_width => ww,
@@ -128,13 +132,13 @@ module C80Yax
 
     def images_no_main(thumb_size = 'thumb_sm')
       res = ''
-      model.wphotos.each_with_index do |wp, index|
+      model.iphotos.each_with_index do |wp, index|
         next if index.zero?
         img = h.image_tag wp.image.send(thumb_size).url
         lnk = h.link_to img, wp.image.thumb_lg.url
         res += "<li>#{lnk}</li>"
       end
-      "<ul class='work_images_no_main'>#{res}</ul>".html_safe
+      "<ul class='item_images_no_main'>#{res}</ul>".html_safe
     end
 
     def div_p_desc

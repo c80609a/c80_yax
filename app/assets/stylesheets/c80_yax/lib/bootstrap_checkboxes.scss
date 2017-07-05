@@ -56,3 +56,7 @@
 .radio label input[type="radio"]:disabled + .cr {
   opacity: .5;
 }
+
+.fa-check:before {
+  font-family: FontAwesome !important;
+}

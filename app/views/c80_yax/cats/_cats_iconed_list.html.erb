@@ -11,7 +11,7 @@
         <% k = index % 4 %>
         <li class="child-<%=k+1%>th">
 
-          <%= link_to "#{cat_normal_url(cat)}",
+          <%= link_to "#{proc_make_url.call(cat)}",
                       :title => cat.title,
                       :class => 'a_cat_nav',
                       :id => "a_#{cat.slug}",
