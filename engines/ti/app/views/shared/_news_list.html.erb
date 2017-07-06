@@ -1,0 +1,16 @@
+<div class="news_list clearfix per_row_<%=per_row%>">
+  <% news_list.each_with_index do |fact, index| %>
+
+      <%# чтобы не было такого https://dl.dropboxusercontent.com/u/1365807/work/sokol/tx/2016-11-05_165449_news_clear.jpg %>
+      <% clear_left_css_class = index % per_row == 0 ? 'clear_left':'' %>
+      <% clear_left_css_class += " index_#{index}" %>
+
+      <%= render_one_fact(fact, partial_name, thumb_size, clear_left_css_class.to_s).to_s %>
+
+  <% end %>
+</div>
+<% if is_news_page || is_render_paginator %>
+    <div class="div_will_paginate">
+      <%= will_paginate news_list %>
+    </div>
+<% end %>

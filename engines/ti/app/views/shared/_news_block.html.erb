@@ -1,0 +1,18 @@
+<% if h3_title.present? %>
+    <h3 class="section_title h3_for_news_block"><%= h3_title %></h3>
+<% end %>
+<div class="ajax_div news_block <%= css_class_news_block %>"
+     data-partial_name="<%= partial_name %>"
+     data-css_class_news_block="<%= css_class_news_block %>"
+     data-is_render_paginator="<%= is_render_paginator %>">
+  <%= render :partial => "shared/news_list",
+             :locals => {
+                     :news_list => news_list,
+                     :is_news_page => is_news_page,
+                     :per_row => per_block_row,
+                     :partial_name => partial_name,
+                     :is_render_paginator => is_render_paginator,
+                     :thumb_size => thumb_size
+             }
+  %>
+</div>

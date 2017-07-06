@@ -6,6 +6,7 @@ require 'c80_yax/item_photos_sizes_cache'
 require 'rails-observers'
 require 'mini_magick'
 require_relative '../engines/pack/lib/pack'
+require_relative '../engines/ti/lib/ti'
 
 module C80Yax
   def self.table_name_prefix

@@ -1,0 +1,13 @@
+<div class="fact" data-url="<%= url_for_fact(fact) %>">
+  <p class="date">
+    <%= local_time(fact[:created_at], format: '%e.%m.%Y') %>
+  </p>
+  <%= link_to(url_for_fact(fact)) do %>
+    <h5><%= fact.title %></h5>
+  <% end %>
+  [[1]]
+  <p class="short">
+    <%= fact[:short].html_safe %>
+  </p>
+  <div class="white_shadow"></div>
+</div>

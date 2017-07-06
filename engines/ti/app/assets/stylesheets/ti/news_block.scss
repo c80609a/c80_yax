@@ -1,0 +1,49 @@
+div.news_block {
+
+  div.news_list {
+    position: relative; /** Needed to ensure items are laid out relative to this container **/
+    padding: 0;
+    margin: 0;
+
+    div.fact {
+      display: block;
+      float: left;
+      /*width: 229px;*/
+      /*max-height: 350px;*/
+      overflow: hidden;
+      margin-bottom: 25px;
+
+      img {
+        margin-bottom: 15px;
+        max-width: 100%;
+      }
+
+      &.clear_left {
+        clear: left;
+      }
+
+    }
+
+    &.per_row_3 {
+      .fact {
+        width: 33.33333%;
+      }
+    }
+
+    &.per_row_4 {
+      .fact {
+        width: 25%;
+      }
+    }
+
+    &.is_news_page {
+
+      div.fact {
+
+      }
+
+    }
+
+  }
+
+}

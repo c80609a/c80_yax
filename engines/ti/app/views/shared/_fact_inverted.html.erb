@@ -1,0 +1,20 @@
+<div class="fact <%=additional_css_class%>">
+  <%= render_image_link_lazy({
+                                     :alt_image => fact.title,
+                                     :image => fact.send(thumb_size),
+                                     :a_href => url_for_fact(fact),
+                                     :a_class => '',
+                                     :a_style => css_common_width_height,
+                                     :a_rel => 'nofollow'
+                             }) %>
+  <%= link_to(url_for_fact(fact), class: 'h5') do %>
+      <h5 style="<%= css_common_width %>"><%= fact.title %></h5>
+  <% end %>
+  <p class="date" style="<%= css_common_width %>">
+    <%= local_time(fact[:created_at], format: '%e.%m.%Y') %>
+  </p>
+  <p class="short" style="<%= css_common_width %>">
+    <%= fact[:short].html_safe %>
+  </p>
+  <div class="white_shadow"></div>
+</div>
