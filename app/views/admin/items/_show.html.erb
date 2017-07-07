@@ -1,0 +1,11 @@
+<%= render_show_item(item, false) %>
+
+<div class="other_items">
+  <h2 class="yield_h2">Похожие товары</h2>
+  <%= c80_yax_render_related(item, 'thumb_md', 4) %>
+</div>
+
+<div class="similar_items">
+  <h2 class="yield_h2">С этим товаром часто покупают</h2>
+  <%= c80_yax_render_similar(item, 'thumb_md', 4) %>
+</div>

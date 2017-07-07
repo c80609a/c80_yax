@@ -1,3 +1,13 @@
+%scrolling_checkboxes {
+  display: block;
+  height: 300px;
+  overflow-y: auto;
+  width: 80%;
+  overflow-x: hidden;
+  padding: 0px;
+  margin-left: 20%;
+}
+
 //---[ товары ]---------------------------------------------------------------------------------------------------------
 
 body.admin_items {
@@ -117,6 +127,20 @@ body.admin_items {
 
       }
 
+    }
+
+    // список чекбоксов в блоке "с этим товаром часто покупают"
+    li#item_similar_items_input {
+      ol.choices-group {
+        @extend %scrolling_checkboxes;
+      }
+    }
+
+    // список чекбоксов в блоке "Похожие товары"
+    li#item_related_childs_input {
+      ol.choices-group {
+        @extend %scrolling_checkboxes;
+      }
     }
 
     /*стилизуем чекбоксы*/
