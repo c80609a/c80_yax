@@ -32,6 +32,21 @@ module C80Yax
                }
       end
 
+      def c80_yax_render_similar(item, thumb_size = 'thumb_md', count = 4)
+        itms = item.similar_items
+                   .includes(item_props: {prop_name: [:uom, :related]})
+                   .includes(:iphotos)
+                   .includes(:strsubcat)
+                   .limit(count)
+        items = ItemDecorator.decorate_collection(itms)
+        render partial: 'c80_yax/items/index',
+               locals: {
+                   items: items,
+                   without_paginator: true,
+                   thumb_size: thumb_size
+               }
+      end
+
       private
 
     end

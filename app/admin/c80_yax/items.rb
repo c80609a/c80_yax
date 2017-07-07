@@ -20,7 +20,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :item_props_attributes => [:value, :_destroy, :prop_name_id, :id],
                 :vendor_ids => [],
                 :color_ids => [],
-                :similar_child_ids => [],
+                :similar_item_ids => [],
                 :related_child_ids => []
   # :gallery_ids => [],
 
@@ -121,12 +121,9 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
     end
 
     f.inputs 'С этим товаром часто покупают', :class => 'collapsed' do
-      f.input :similar_childs,
+      f.input :similar_items,
               :as => :check_boxes,
               :collection => C80Yax::Item.all
-              # :member_label => Proc.new { |p|
-              #   p.title
-              # }
     end
 
     f.inputs "Укажите товары, которые будут выводиться в блоке 'Похожие товары'", :class => 'collapsed' do
@@ -143,7 +140,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
   end
 
   show do
-    render_show_item(item.decorate)
+    render 'show', { item: item.decorate }
   end
 
 end

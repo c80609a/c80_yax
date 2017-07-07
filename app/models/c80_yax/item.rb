@@ -37,11 +37,11 @@ class C80Yax::Item < ActiveRecord::Base
   has_many :related_childs, :class_name => 'C80Yax::Item', :foreign_key => 'related_parent_id'
   belongs_to :related_parent, :class_name => 'C80Yax::Item'
 
-  has_many :similar_childs,
-           class_name: 'C80Yax::Item',
-           foreign_key: 'similar_parent_id'
-  belongs_to :similar_parent,
-             class_name: 'C80Yax::Item'
+  has_and_belongs_to_many :similar_items,
+                          class_name: 'C80Yax::Item',
+                          join_table: 'c80_yax_items_similar',
+                          foreign_key: 'item_id',
+                          association_foreign_key: 'similar_item_id'
 
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged
