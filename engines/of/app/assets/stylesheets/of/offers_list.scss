@@ -1,0 +1,27 @@
+ul.offers_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    margin-bottom: 20px;
+
+    a.lazy-image-wrapper {
+      display: inline-block;
+      width: 1250px;
+      height: 260px;
+      overflow: hidden;
+
+    }
+
+    h5 {
+      a {
+        color: #676666;
+        text-decoration: none;
+        tex-transform: uppercase;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+    }
+  }
+}

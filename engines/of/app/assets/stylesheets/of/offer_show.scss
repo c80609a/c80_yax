@@ -1,0 +1,20 @@
+div.offer_show {
+  @include clearfix;
+
+  > div {
+    float: left;
+    width: 100%;
+    clear: both;
+
+    &.fst {
+      width: 1250px;
+      height: 260px;
+    }
+
+    &.scnd {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+  }
+}

@@ -1,0 +1,16 @@
+<div class="offer_show offer_<%= offer.id %>">
+  <div class="fst">
+    <%= render_image_link_lazy({
+                                   :alt_image => offer.title,
+                                   :image => offer.cover_url('thumb_lg'),
+                                   :a_href => '#',
+                                   :a_rel => 'nofollow'
+                               }) %>
+  </div>
+  <div class="second">
+    <%= offer.items_list %>
+  </div>
+  <div class="third">
+    <%= offer.desc.html_safe if offer.desc.present? %>
+  </div>
+</div>

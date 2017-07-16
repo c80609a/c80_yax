@@ -1,0 +1,7 @@
+<ul class="dropdown-menu offers_list_flat">
+<% offers.each do |offer| %>
+    <li class="menu-item dropdown o_<%= offer.id %>">
+      <%= link_to offer.title, p_make_offer_url.call(offer), title: offer.title %>
+    </li>
+<% end %>
+</ul>

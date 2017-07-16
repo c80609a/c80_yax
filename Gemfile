@@ -5,3 +5,4 @@ gemspec
 
 gem 'pack', path: 'engines/pack'
 gem 'ti', path: 'engines/ti'
+gem 'of', path: 'engines/of'

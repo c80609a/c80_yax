@@ -43,6 +43,12 @@ class C80Yax::Item < ActiveRecord::Base
                           foreign_key: 'item_id',
                           association_foreign_key: 'similar_item_id'
 
+  has_and_belongs_to_many :offers,
+                          class_name: 'Of::Offer',
+                          foreign_key: 'offer_id',
+                          join_table: 'of_items_offers',
+                          association_foreign_key: 'item_id'
+
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged
 
