@@ -5,7 +5,7 @@ module Ti
     process :resize_to_limit => [1600,1600]
 
     def store_dir
-      "uploads/docs/#{format('%02d', model.fact_id)}"
+      "uploads/docs/#{format('%02d', model.doc_id)}"
     end
 
     # ---[ идут в контент новости ]---[ размер зависит от SiteProps.page_content_width ]--------------------------------------------------------------------------------------------------------------------

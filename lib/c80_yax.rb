@@ -7,6 +7,7 @@ require 'rails-observers'
 require 'mini_magick'
 require_relative '../engines/pack/lib/pack'
 require_relative '../engines/ti/lib/ti'
+require_relative '../engines/of/lib/of'
 
 module C80Yax
   def self.table_name_prefix
