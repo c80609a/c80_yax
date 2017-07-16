@@ -15,5 +15,13 @@ module Of
     # validates_with DocValidator
     default_scope {order(:created_at => :desc)}
 
+    def cover_url(thumb_size='thumb_md')
+      res = ''
+      unless ophotos.size.zero?
+        res = ophotos.first.image.send(thumb_size).url
+      end
+      res
+    end
+
   end
 end
