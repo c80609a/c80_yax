@@ -48,7 +48,26 @@ module C80Yax
       end
 
       def c80_yax_render_offers_index(thumb_size = 'thumb_md', page=1, per_page = 16)
-        itms = Item.joins(:offers).paginate(page: page, per_page: per_page)
+        itms = Item.joins(:offers)
+                   .includes(item_props: {prop_name: [:uom, :related]})
+                   .includes(:iphotos)
+                   .includes(:strsubcat)
+                   .paginate(page: page, per_page: per_page)
+        items = ItemDecorator.decorate_collection(itms)
+        render partial: 'c80_yax/items/index',
+               locals: {
+                   items: items,
+                   without_paginator: true,
+                   thumb_size: thumb_size
+               }
+      end
+
+      def c80_yax_render_offers_hits(thumb_size = 'thumb_md', page=1, per_page = 16)
+        itms = Item.where(is_hit: true)
+                   .includes(item_props: {prop_name: [:uom, :related]})
+                   .includes(:iphotos)
+                   .includes(:strsubcat)
+                   .paginate(page: page, per_page: per_page)
         items = ItemDecorator.decorate_collection(itms)
         render partial: 'c80_yax/items/index',
                locals: {
