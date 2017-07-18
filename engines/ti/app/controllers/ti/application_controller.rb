@@ -5,10 +5,5 @@ module Ti
 
     helper C80LazyImages::Engine.helpers
 
-    def guru
-      respond_to do |format|
-        format.js
-      end
-    end
   end
 end
