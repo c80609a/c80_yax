@@ -1,0 +1,18 @@
+#lo {
+  position: absolute;
+  background: transparent url(image_path('c80_yax/lo.gif')) no-repeat 50% 50%;
+  z-index: 120;
+  transition: visibility 1s, opacity 0.5s linear;
+
+  &.invis {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  width: 292px;
+  height: 111px;
+  background-size: 10%;
+  //noinspection CssOptimizeSimilarProperties
+  //background-color: rgba(0,0,0,0.1);
+
+}

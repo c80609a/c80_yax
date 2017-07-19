@@ -21,12 +21,53 @@ var MoreItemsList = function (wrapper) {
     var _$wrapper;
     var _$next_btn;
 
+    var loading = (function () {
+
+        var _$lo;
+
+        var _fInit = function () {
+            _$lo = $('<div id="lo"></div>');
+        };
+
+        var fShow = function ($clickedButton) {
+            // console.log('fShow');
+
+            _$lo.appendTo($('body'));
+
+            var top = $clickedButton.offset().top;
+            var left = $clickedButton.offset().left;
+            top = top + $clickedButton.height()/2 - _$lo.height()/2;
+
+            _$lo.css("top",top+"px");
+            _$lo.css("left",left+"px");
+        };
+
+        var fHide = function () {
+            _$lo.addClass('invis');
+            setTimeout(function () {
+                _$lo.remove();
+                _$lo.removeClass('invis');
+            }, 1000);
+        };
+
+        _fInit();
+
+        return {
+            show:fShow,
+            hide:fHide
+        }
+
+    })();
+
     // клик по кнопке "больше товаров"
     var _fOnClickNext = function(e) {
         e.preventDefault();
+        var $t = $(e.target);
         var t = _$wrapper.data('type');
-        var p = $(e.target).attr('href').split('page=')[1];
+        var p = $t.attr('href').split('page=')[1];
         console.log('<_fOnClickNext> type: ' + t + '; page: ' + p);
+
+        loading.show($t);
 
         $.ajax({
             url: "/fetch_items",
@@ -37,8 +78,10 @@ var MoreItemsList = function (wrapper) {
             },
             dataType: "script",
             type: 'GET'
+        }).done(function() {
+            loading.hide();
         });
-    }
+    };
 
     // начинаем слушать клики по кнопке "больше товаров"
     var _fSetNextPageBehaviour = function() {
