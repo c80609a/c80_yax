@@ -1,28 +1,22 @@
-<%
-%>
+var $cc = $("<%= @params[:ajax_items_div] %>");
 
-//var $cc = $(".ajax_items");
-var $cc = $(".<%=params['ajax_items']%>");
-var html_str = "<%# j render :partial => "site/stroitelnye_materialy/items_list_by_sql_new",
-                                            :locals => {
-                                                items:@items,
-                                                strsubcat_id:params[:strsubcat_id]
-                                            } %>";
+var html_str = "<%= j render partial: 'c80_yax/items/index',
+      locals: {
+      items: @items,
+          will_paginate_items: @itms,
+          without_paginator: false,
+          thumb_size: 'thumb_md'
+  } %>";
 
-html_str = "<%= j render_related(params['type'],
-                                 'thumb_md',
-                                 params['page'],
-                                 params['per_page']
-                                 ) %>";
+var hh = $cc.outerHeight(true) + "px";
+$cc.css('min-height', hh);
+$cc.find('.will_paginate').remove();
+$cc.append($(html_str));
 
-$cc.html(html_str);
+<% if @params[:type] == 'hit' %>
+    $cc.css('margin-bottom', '165px');
+<% end %>
 
-//$subcat_navigator.processWillPaginateLinks();
-
-//activatePerPageLink(<%= @params[:per_page] %>);
+_activate_more_items();
 
 fLazyStart();
-
-//if (typeof refinePriceDecorator != 'undefined') {
-//    refinePriceDecorator.init();
-//}

@@ -1,6 +1,8 @@
 .more_items_list {
  .will_paginate {
    text-align: center;
+   z-index: 33;
+   position: relative;
 
    > div.pagination {
      margin: 0 0 30px 0;

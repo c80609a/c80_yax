@@ -1,7 +1,7 @@
 "use strict";
 
 /*
- * <div class="container-fluid hits_widget more_items_list">
+ * <div class="container-fluid hits_widget more_items_list" data-type='hit|offer'>
  *      <div class="container">
  *           <h2 class="yield_h2">Хиты продаж</h2>
  *           <div class="ajax_div">
@@ -21,11 +21,26 @@ var MoreItemsList = function (wrapper) {
     var _$wrapper;
     var _$next_btn;
 
+    // клик по кнопке "больше товаров"
     var _fOnClickNext = function(e) {
         e.preventDefault();
-        console.log('<_fOnClickNext>');
+        var t = _$wrapper.data('type');
+        var p = $(e.target).attr('href').split('page=')[1];
+        console.log('<_fOnClickNext> type: ' + t + '; page: ' + p);
+
+        $.ajax({
+            url: "/fetch_items",
+            data: {
+                type: t,
+                page: p,
+                ajax_items_div: "." + _$wrapper.attr('class').split(' ').join('.') + " .ajax_div"
+            },
+            dataType: "script",
+            type: 'GET'
+        });
     }
 
+    // начинаем слушать клики по кнопке "больше товаров"
     var _fSetNextPageBehaviour = function() {
 
         // находим в нем next кнопку will paginate
