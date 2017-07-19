@@ -1,0 +1,41 @@
+ul.tech_info_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  h2 {
+    text-transform: uppercase;
+    @extend %HelveticaNeueCyrRoman;
+    font-size: 20px;
+  }
+
+  ul.docs_of_cats {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    h3 {
+      @extend %HelveticaNeueCyrRoman;
+      font-size: 15px;
+      background-color: #EC2127;
+      color: white;
+      padding: 15px 15px 15px 20px;
+    }
+
+    ul.docs {
+      list-style: none;
+      padding: 0 0 0 19px;
+
+      a {
+        font-family: HelveticaNeueCyrRoman;
+        color: #777777;
+        text-decoration: underline;
+        font-size: 15px;
+        &:hover {
+          color: #333333;
+        }
+      }
+    }
+  }
+
+}

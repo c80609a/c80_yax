@@ -1,0 +1,22 @@
+var $cc = $("<%= @params[:ajax_items_div] %>");
+
+var html_str = "<%= j render partial: 'c80_yax/items/index',
+      locals: {
+      items: @items,
+          will_paginate_items: @itms,
+          without_paginator: false,
+          thumb_size: 'thumb_md'
+  } %>";
+
+var hh = $cc.outerHeight(true) + "px";
+$cc.css('min-height', hh);
+$cc.find('.will_paginate').remove();
+$cc.append($(html_str));
+
+<% if @params[:type] == 'hit' %>
+    $cc.css('margin-bottom', '165px');
+<% end %>
+
+_activate_more_items();
+
+fLazyStart();

@@ -1,4 +1,4 @@
-.add_to_bucket {
+@mixin add_to_bucket {
   @include color_button(#FFFFFF, $red);
 
   line-height: 35px;
@@ -10,14 +10,33 @@
   &:before {
     content: '';
     display: block;
-    width: 44px;
-    height: 44px;
     position: absolute;
-    background: transparent image-url('cart_icon.png') no-repeat 35% 50%;
-    left: 18%;
-    top: 14%;
   }
 
-  // TODO-1:: добавить иконку корзины
+}
 
+.add_to_bucket {
+  @include add_to_bucket;
+
+  &:before {
+    width: 44px;
+    height: 44px;
+    left: 18%;
+    top: 14%;
+    background: transparent image-url('cart_icon.png') no-repeat 35% 50%;
+  }
+}
+
+.add_to_bucket_sm {
+  @include add_to_bucket;
+  width: 49px;
+  height: 36px;
+
+  &:before {
+    width: 33px;
+    height: 33px;
+    left: 18%;
+    top: 1%;
+    background: transparent image-url('c80_yax/cart_icon_sm.png') no-repeat 50% 50%;
+  }
 }

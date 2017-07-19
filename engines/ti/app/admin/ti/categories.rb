@@ -7,11 +7,15 @@ ActiveAdmin.register Ti::Category, as: 'Category' do
   permit_params :title,
                 :full,
                 :ord,
+                :is_listed,
                 :parent_category_id
 
   config.sort_order = 'id_asc'
   # config.clear_action_items!
   config.batch_actions = false
+
+  scope  "All", :all
+  scope  "Listed", :listed
 
   # filter :title
   # filter :strsubcats
@@ -30,6 +34,7 @@ ActiveAdmin.register Ti::Category, as: 'Category' do
 
     column :title
     column :ord
+    column :is_listed
     column :parent_category do |pn|
       if pn.parent_category_id.present?
         rpn = Ti::Category.find_by(id:pn.parent_category_id)
@@ -45,6 +50,7 @@ ActiveAdmin.register Ti::Category, as: 'Category' do
     f.inputs 'Свойства' do
       f.input :title
       f.input :ord
+      f.input :is_listed
 
       f.input :parent_category,
               as: :select,

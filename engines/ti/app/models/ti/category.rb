@@ -7,5 +7,7 @@ module Ti
     belongs_to :parent_category, class_name: 'Ti::Category'
     has_and_belongs_to_many :docs
     validates :title, presence: true
+    scope :listed, -> { where(is_listed: true) }
+    default_scope {order(:ord => :asc)}
   end
 end
