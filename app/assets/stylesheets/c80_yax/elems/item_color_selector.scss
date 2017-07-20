@@ -1,0 +1,25 @@
+ul.item_color_selector {
+  @include clearfix;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    float: left;
+    margin-right: 5px;
+    border: 1px solid #B2B2B2;
+    display: block;
+    width: 29px;
+    height: 29px;
+    cursor: pointer;
+
+    &.active {
+      border: 1px solid #fc0000;
+    }
+
+    &:hover {
+      border: 1px solid #000000;
+    }
+
+  }
+}

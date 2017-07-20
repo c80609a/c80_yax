@@ -1,0 +1,7 @@
+<ul class="item_color_selector">
+  <% colors.each do |color| %>
+      <% style = "style='background-color: #{color.value}'".html_safe %>
+      <% klass = "class='c_#{color.id}'".html_safe %>
+      <li <%=style%> <%=klass%></li>
+  <% end %>
+</ul>
