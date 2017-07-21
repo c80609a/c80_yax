@@ -6,6 +6,10 @@ var ItemColorSelector = function(wrapper) {
     var _$lic;
     var _sel_color;
 
+    var _get_sel_color = function() {
+        return  _sel_color;
+    };
+
     var _set_sel_color = function(new_color) {
         _sel_color = new_color;
     };
@@ -35,5 +39,9 @@ var ItemColorSelector = function(wrapper) {
     };
 
     _fInit(wrapper);
+
+    return {
+        get_cur_val: _get_sel_color
+    }
 
 };

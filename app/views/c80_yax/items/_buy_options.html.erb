@@ -1,9 +1,11 @@
-<% elems.each do |elem| %>
-    <div class="checkbox <%=elem[:style]%>">
-      <label>
-        <input type="checkbox" value="<%=elem[:value]%>" checked>
-        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-        <%= elem[:label].html_safe %>
-      </label>
-    </div>
-<% end %>
+<div class="buy_options" data-id="<%= item.id %>">
+  <% elems.each do |elem| %>
+      <div data-tag="<%=elem[:tag]%>" data-tag="<%=elem[:label]%>" class="checkbox <%=elem[:style]%>">
+        <label>
+          <input type="checkbox" checked>
+          <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+          <%= elem[:label].html_safe %>
+        </label>
+      </div>
+  <% end %>
+</div>

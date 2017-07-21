@@ -1,4 +1,4 @@
-<ul class="item_color_selector">
+<ul class="item_color_selector" data-id="<%= item.id %>">
   <li class="caption">Цвет: </li>
   <% colors.each do |color| %>
       <% style = "style='background-color: #{color.value}'".html_safe %>

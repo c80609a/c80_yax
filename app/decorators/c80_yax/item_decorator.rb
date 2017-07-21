@@ -89,7 +89,7 @@ module C80Yax
         res = ''
         props[:titles].each_with_index do |title, i|
           e = "<p data-title='#{title}' class='old'><span class='pvalue bold'>#{props[:values_old][i]}</span> <span class='puom'>#{_uom(props[:uoms][i])}</span></p>" # 1212,80 руб
-          e += "<p data-title='#{title}'><span class='pvalue bold'>#{props[:values][i]}</span> <span class='puom'>#{_uom(props[:uoms][i])}</span></p>" # 1212,80 руб
+          e += "<p data-title='#{title}' class='cur'><span class='pvalue bold'>#{props[:values][i]}</span> <span class='puom'>#{_uom(props[:uoms][i])}</span></p>" # 1212,80 руб
           e = "<li>#{e}</li>"
           res += e
         end

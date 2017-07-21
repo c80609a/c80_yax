@@ -1,8 +1,11 @@
 "use strict";
 
+var ITEM_QUANTITY_PICKERS = {};
+
 var _activate_q_picker = function() {
     $('.quantity_picker').each(function() {
-        new ItemQuantityPicker(this);
+        ITEM_QUANTITY_PICKERS[$(this).data('id')] =
+            new ItemQuantityPicker(this);
     });
 };
 
