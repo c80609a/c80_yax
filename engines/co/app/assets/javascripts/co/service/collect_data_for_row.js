@@ -1,11 +1,11 @@
 // собирает данные с формы просмотра/заказа товара, на основе которых
 // создастся row to cart
 
-var CollectDataForRow = function() {
+var CollectDataForRow = function(item_id) {
     this.call = function() {
         console.log("<CollectDataForRow.call>");
         return {
-            id: 1,
+            id: item_id,
             q: 1,
             color: '#ffffff',
             options: {

@@ -3,11 +3,12 @@
 var ButtonAddToCart = function(selector) {
 
     var _$btn;
+    var _item_id;
 
     var _onClickBtn = function(e) {
         console.log('<_onClickBtn>');
         e.preventDefault();
-        var c = new AddRowToCart().call();
+        var c = new AddRowToCart(_item_id).call();
         if (c.result) {
             // com.showDouble(c.message);
             com.showDouble('Продолжить покупки?');
@@ -25,6 +26,7 @@ var ButtonAddToCart = function(selector) {
      */
     var _fInit = function (selector){
         _$btn = $(selector);
+        _item_id = _$btn.data('id');
         _fInitBehaviour();
     };
 
