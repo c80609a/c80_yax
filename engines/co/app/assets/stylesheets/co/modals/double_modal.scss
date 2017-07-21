@@ -1,0 +1,16 @@
+div#double_modal {
+  .modal-dialog {
+    .modal-content {
+
+      .modal-header {
+        opacity: 0;
+        .button { opacity: 0; }
+        h4 { opacity: 0; }
+      }
+
+      .modal-body {
+      }
+
+    }
+  }
+}
