@@ -14,7 +14,7 @@ var CookiesService = function() {
     };
 
     var _read_cookie = function(name) {
-        console.log('<CookiesService._read_cookie> name = ' + name);
+        // console.log('<CookiesService._read_cookie> name = ' + name);
         var nameEQ = encodeURIComponent(name) + "=";
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
@@ -22,7 +22,7 @@ var CookiesService = function() {
             while (c.charAt(0) === ' ') c = c.substring(1, c.length);
             if (c.indexOf(nameEQ) === 0) {
                 var s = JSON.parse(c.substring(nameEQ.length, c.length));
-                console.log('<CookiesService._read_cookie> subs: ' + s);
+                // console.log('<CookiesService._read_cookie> subs: ' + s);
                 return s;
             }
         }
@@ -36,6 +36,11 @@ var CookiesService = function() {
         _create_cookie('cart3', cart, 256);
         console.log('<CookiesService.cart_push>');
     };
+
+    this.cart_get = function() {
+        var cart = _read_cookie('cart3');
+        return cart;
+    }
 
     this.cart_clean = function() {
         var cart = _read_cookie('cart3');
