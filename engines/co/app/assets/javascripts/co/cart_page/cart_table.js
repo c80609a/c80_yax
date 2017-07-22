@@ -24,7 +24,11 @@ var CartTable = function ($table){
         _rows.push(row_hash);
         var $row = $(_support.make_row_htmlstr(row_hash));
         _$tbody.append($row);
-        _activate_q_picker();
+        _activate_q_picker(function(value_after_change) {
+            console.log('<value_after_change> ' + value_after_change);
+            var new_price = value_after_change * $row.data('price_per_item');
+            $row.find('td.price').text(new_price);
+        });
     };
 
     this.clear = function() {

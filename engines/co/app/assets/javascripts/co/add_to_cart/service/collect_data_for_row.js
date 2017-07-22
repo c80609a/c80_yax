@@ -8,7 +8,8 @@ var CollectDataForRow = function(item_id) {
         var $item_show = $('.item_show_'+item_id);
 
         var q = ITEM_QUANTITY_PICKERS[item_id].get_cur_val();
-        var price = q * Number($item_show.find('.price_props p.cur span.pvalue').text().split(',').join('.'));
+        var price_per_item = Number($item_show.find('.price_props p.cur span.pvalue').text().split(',').join('.'));
+        var price = q * price_per_item;
         var title = $item_show.data('title');
         var color = ITEM_COLOR_SELECTOR[item_id].get_cur_val();
         var options = ITEM_OPTIONS[item_id].get_cur_val();
@@ -19,6 +20,7 @@ var CollectDataForRow = function(item_id) {
             q: q,
             color: color,
             price: price,
+            price_per_item: price_per_item,
             image_url: $item_show.data('image_url'),
             item_url: $item_show.data('item_url'),
             options: {

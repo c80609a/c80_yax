@@ -5,6 +5,7 @@ var DataOrderRow = function (){
         quantity: 0,
         color: '#ffffff',
         price: 0,
+        price_per_item: 0,
         image_url: '',
         item_url: '',
         mark_order: true,
