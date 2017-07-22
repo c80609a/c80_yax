@@ -1,0 +1,44 @@
+div#cart_page {
+  div.bottom_row {
+    @include clearfix;
+    margin-bottom: 35px;
+
+    > * {
+      float: left;
+      margin-right: 67px;
+
+      &.result {
+        text-transform: uppercase;
+        font-size: 23px;
+        padding-top: 7px;
+
+        .caption {
+          display: inline-block;
+          margin-left: 15px;
+        }
+        .val {
+          display: inline-block;
+        }
+      }
+
+      &.make_order_chbx {
+        label {
+          font-size: 21px;
+          color: #a1a1a1;
+        }
+      }
+
+      &.clear_the_cart {
+        padding-top: 7px;
+        margin-right: 0;
+        a {
+          @include cart_button;
+          float: left;
+        }
+      }
+    }
+
+
+
+  }
+}

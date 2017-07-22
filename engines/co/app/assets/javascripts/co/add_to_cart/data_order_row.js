@@ -1,6 +1,7 @@
 var DataOrderRow = function (){
     data = {
         id: 0,
+        title: '',
         quantity: 0,
         color: '#ffffff',
         price: 0,

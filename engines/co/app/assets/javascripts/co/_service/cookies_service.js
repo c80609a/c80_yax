@@ -43,6 +43,7 @@ var CookiesService = function() {
     }
 
     this.cart_clean = function() {
+        console.log('<cart_clean>');
         var cart = _read_cookie('cart3');
         if (cart === null) return;
         cart = [];

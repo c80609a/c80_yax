@@ -9,11 +9,13 @@ var CollectDataForRow = function(item_id) {
 
         var q = ITEM_QUANTITY_PICKERS[item_id].get_cur_val();
         var price = q * Number($item_show.find('.price_props p.cur span.pvalue').text().split(',').join('.'));
+        var title = $item_show.data('title');
         var color = ITEM_COLOR_SELECTOR[item_id].get_cur_val();
         var options = ITEM_OPTIONS[item_id].get_cur_val();
 
         return {
             id: item_id,
+            title: title,
             q: q,
             color: color,
             price: price,
