@@ -1,0 +1,41 @@
+<%# CartPageHelper#c80_yax_render_cart %>
+
+<div id="cart_page">
+  <table class="cart_table">
+    <thead>
+      <tr>
+        <th class="image">Товар</th>
+        <th class="title">&nbsp;</th>
+        <th class="color">Цвет</th>
+        <th class="q">Кол-во</th>
+        <th class="price">Сумма</th>
+        <th class="actions">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="bottom_row">
+    <div class="result">
+      <span class="caption">Итого:</span>
+      <span class="val"></span>
+    </div>
+    <div class="make_order_chbx">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox">
+          <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+          Заказать доставку
+        </label>
+      </div>
+    </div>
+    <div class="clear_the_cart">
+      <%= link_to 'Очистить корзину', '#', class: 'clear_btn' %>
+    </div>
+  </div>
+  <%= render_image_link_lazy({
+                                 :alt_image => 'Корзина демо',
+                                 :image => image_url('demo_cart.jpg'),
+                                 :a_href => '#',
+                                 :a_rel => 'nofollow'
+                             }) %>
+</div>

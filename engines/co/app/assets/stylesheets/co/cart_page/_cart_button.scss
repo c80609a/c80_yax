@@ -1,0 +1,13 @@
+@mixin cart_button {
+  @include color_button(#cccccc, #ffffff);
+  border: 1px solid #cccccc !important;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ffffff !important;
+    border: 1px solid #717171 !important;
+    color: #717171 !important;
+  }
+}

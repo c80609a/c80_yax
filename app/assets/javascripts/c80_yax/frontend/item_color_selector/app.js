@@ -1,8 +1,11 @@
 "use strict";
 
+var ITEM_COLOR_SELECTOR = {};
+
 var _activate_color_selectors = function() {
     $('.item_color_selector').each(function() {
-        new ItemColorSelector(this);
+        ITEM_COLOR_SELECTOR[$(this).data('id')] =
+            new ItemColorSelector(this);
     });
 };
 

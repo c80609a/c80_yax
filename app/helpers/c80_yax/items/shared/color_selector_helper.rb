@@ -8,7 +8,8 @@ module C80Yax
           unless colors.size.zero?
             render :partial => 'c80_yax/items/color_selector',
                    :locals => {
-                       colors: colors
+                       colors: colors,
+                       item: item
                    }
           end
         end

@@ -1,0 +1,88 @@
+%col-image {
+  width: 290px;
+}
+%col-title {
+  width: 250px;
+}
+%col-color {
+  width: 130px;
+}
+%col-q {
+  width: 198px;
+}
+%col-price {
+  width: 190px;
+}
+%col-actions {
+  width: 233px;
+}
+
+table.cart_table {
+  margin-bottom: 25px;
+
+  th {
+    text-align: left;
+    background-color: #dfdddd;
+    padding: 15px 15px;
+    text-transform: uppercase;
+    color: #6e6e6e;
+    font-size: 17px;
+    font-weight: normal;
+    &.image {
+      @extend %col-image;
+    }
+    &.title {
+      @extend %col-title;
+    }
+    &.color {
+      @extend %col-color;
+    }
+    &.q {
+      @extend %col-q;
+    }
+    &.price {
+      @extend %col-price;
+    }
+    &.actions {
+      @extend %col-actions;
+    }
+  }
+
+  td {
+    padding: 15px;
+    &.image {
+      @extend %col-image;
+      padding-left: 0;
+
+      a.lazy-image-wrapper {
+        display: block;
+        width: 290px;
+        height: 240px;
+      }
+    }
+    &.title {
+      @extend %col-title;
+      font-size: 23px;
+    }
+    &.color {
+      @extend %col-color;
+      padding: 0 25px;
+    }
+    &.q {
+      @extend %col-q;
+    }
+    &.price {
+      @extend %col-price;
+      font-size: 32px;
+      color: #6a6969;
+    }
+    &.actions {
+      @extend %col-actions;
+      padding-right: 0;
+      a {
+        @include cart_button;
+        float: right;
+      }
+    }
+  }
+}
