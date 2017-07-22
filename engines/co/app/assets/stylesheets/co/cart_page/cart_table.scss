@@ -8,13 +8,13 @@
   width: 130px;
 }
 %col-q {
-  width: 170px;
+  width: 198px;
 }
 %col-price {
   width: 190px;
 }
 %col-actions {
-  width: 150px;
+  width: 233px;
 }
 
 table.cart_table {
@@ -52,6 +52,8 @@ table.cart_table {
     padding: 15px;
     &.image {
       @extend %col-image;
+      padding-left: 0;
+
       a.lazy-image-wrapper {
         display: block;
         width: 290px;
@@ -76,10 +78,10 @@ table.cart_table {
     }
     &.actions {
       @extend %col-actions;
-      padding-left: 0;
+      padding-right: 0;
       a {
         @include cart_button;
-        float: left;
+        float: right;
       }
     }
   }

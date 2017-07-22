@@ -9,12 +9,13 @@ div#cart_page {
 
       &.result {
         text-transform: uppercase;
-        font-size: 23px;
+        font-size: 29px;
         padding-top: 7px;
+        width: 245px;
 
         .caption {
           display: inline-block;
-          margin-left: 15px;
+          margin-right: 15px;
         }
         .val {
           display: inline-block;
@@ -31,9 +32,11 @@ div#cart_page {
       &.clear_the_cart {
         padding-top: 7px;
         margin-right: 0;
+        width: 643px;
+
         a {
           @include cart_button;
-          float: left;
+          float: right;
         }
       }
     }
