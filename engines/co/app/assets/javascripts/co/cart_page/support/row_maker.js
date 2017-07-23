@@ -2,7 +2,7 @@
 
 var RowMaker = function() {
 
-    var _ROW = '<tr class="tr_{{ id }}" data-price_per_item="{{ price_per_item }}">' +
+    var _ROW = '<tr class="tr_{{ id }}" data-price_per_item="{{ price_per_item }}" data-id="{{ id }}">' +
         '<td class="image">' +
             '<a class="lazy-image-wrapper" href=" {{ item_url }}" target="_blank" title="{{ title }}">' +
                 '<img data-original="{{ image_url }}" alt="{{ title }}">' +

@@ -1,23 +1,25 @@
 "use strict";
 
-var CartTable = function ($table){
+var CartTable = function ($table, on_changd){
 
     var _rows;
     var _$table;
     var _$tbody;
     var _support;
+    var __on_changed;
 
     //<editor-fold desc="// Инициализация">
     var _fInitBehaviour = function (){
     };
-    var _fInit = function ($table){
+    var _fInit = function ($table, on_changed){
         _$table = $table;
         _$tbody = _$table.find('tbody');
         _support = new RowMaker();
         _rows = [];
+        __on_changed = on_changed;
         _fInitBehaviour();
     };
-    _fInit($table);
+    _fInit($table, on_changd);
     //</editor-fold>
 
     this.add_row = function(row_hash) {
@@ -28,6 +30,7 @@ var CartTable = function ($table){
             console.log('<value_after_change> ' + value_after_change);
             var new_price = value_after_change * $row.data('price_per_item');
             $row.find('td.price').text(new_price);
+            __on_changed($row.data('id'), {price: new_price});
         });
     };
 

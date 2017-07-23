@@ -50,6 +50,17 @@ var CookiesService = function() {
         _create_cookie('cart3', cart, 256);
     };
 
-
+    this.cart_update_row = function(row_id, obj_with_new_values) {
+        var cart = _read_cookie('cart3');
+        for (var i = 0, row; i < cart.length; i++) {
+            row = cart[i];
+            if (row['id'] != row_id) continue;
+            for (var key in obj_with_new_values) {
+                row[key] = obj_with_new_values[key];
+            }
+            cart[i] = row; // нужно ли так делать?
+        }
+        _create_cookie('cart3', cart, 256);
+    }
 
 };

@@ -24,6 +24,10 @@ var CartPage = function($cart_page) {
         _cart_table.clear();
         coo.cart_clean();
     };
+    var _on_row_changed = function(row_id, obj_with_new_values) {
+        coo.cart_update_row(row_id, obj_with_new_values);
+        _calc_result_price();
+    }
     var _fInitBehaviour = function (){
         _fill_table();
         _calc_result_price();
@@ -32,7 +36,7 @@ var CartPage = function($cart_page) {
     };
     var _fInit = function($cart_page) {
         _$cart_page = $cart_page;
-        _cart_table = new CartTable(_$cart_page.find('table.cart_table'));
+        _cart_table = new CartTable(_$cart_page.find('table.cart_table'), _on_row_changed);
         _$clear_btn = $cart_page.find('.clear_btn');
         _$result_price_val = $cart_page.find('.bottom_row .result .val');
         _fInitBehaviour();
