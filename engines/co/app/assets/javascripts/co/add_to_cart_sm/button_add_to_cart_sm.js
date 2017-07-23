@@ -12,6 +12,7 @@ var ButtonAddToCartSm = function(selector) {
         if (c.result) {
             // com.showDouble(c.message);
             com.showDouble('Продолжить покупки?');
+            ButtonGotoCart.refresh_count();
         }
     };
 

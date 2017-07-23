@@ -11,6 +11,7 @@ var ButtonAddToCart = function(selector) {
         var c = new AddRowToCart(_item_id).call();
         if (c.result) {
             // com.showDouble(c.message);
+            ButtonGotoCart.refresh_count();
             com.showDouble('Продолжить покупки?');
         }
     };
