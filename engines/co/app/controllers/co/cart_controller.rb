@@ -5,23 +5,23 @@ module Co
     end
 
     def message_cart_order
-      # puts "<MessController.handle_message_feedback>"
-      # m = MessageFeedback.new(mess_params)
-      # respond_to do |format|
-      #   if m.save
-      #
-      #     format.js
-      #     MessageFeedbackMailer.send_mess(m, "Сообщение с сайта").deliver
-      #   else
-      #     puts "<MessController.handle_message_feedback> errors: #{m.errors}"
-      #     format.js { render json: m.errors, status: :unprocessable_entity }
-      #   end
-      # end
+      puts '<CartController.message_cart_order>'
+      m = OrderMessage.new(mess_params)
+      respond_to do |format|
+        if m.save
+
+          format.js
+          OrderMessageMailer.send_mess(m, 'Заказ').deliver
+        else
+          puts "<CartController.message_cart_order> errors: #{m.errors}"
+          format.js { render json: m.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
-    # def mess_params
-    #   params.require(:mess).permit(:name, :email_or_phone, :comment, :kapcha)
-    # end
+    def mess_params
+      params.require(:mess).permit(:name, :phone, :comment, :city)
+    end
 
   end
 end

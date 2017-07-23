@@ -8,12 +8,12 @@
       <div class="modal-body regular">
 
         <%= form_for :mess,
-                     :url => '/give_me_cart_order_form',
+                     :url => '/message_cart_order',
                      :remote => true,
                      html: {
                              multipart: true,
                              :role => :form,
-                             :id => "form_feedback",
+                             :id => 'form_message',
                              :data => {
                                      :model => 'mess'
                              }
@@ -71,7 +71,7 @@
 <script>
     $(document).ready(function () {
 
-        var $form = $("form#form_feedback");
+        var $form = $("form#form_message");
 
         $form.bind("ajax:error", function (event, data, status, xhr) {
             $form.render_form_errors($.parseJSON(data.responseText));

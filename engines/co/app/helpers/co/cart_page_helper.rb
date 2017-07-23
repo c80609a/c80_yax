@@ -12,16 +12,16 @@ module Co
 
       render :partial => 'co/cart/shared/cart_order_form',
              :locals => {
-                 :mess => "MessageFeedback.new"
+                 :mess => OrderMessage.new
              }
 
     end
 
     def render_ok_message
-      render :partial => "c80_feedback_form/site/shared/ok_message",
+      render :partial => 'co/cart/shared/ok_message',
              :locals => {
-                 ok_text: "Мы свяжемся с Вами в ближайшее время.",
-                 wtitle: "Ваше сообщение отправлено"
+                 ok_text: 'Мы свяжемся с Вами в ближайшее время.',
+                 wtitle: 'Ваше сообщение отправлено'
              }
     end
 
