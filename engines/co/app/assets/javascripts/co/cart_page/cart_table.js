@@ -30,7 +30,7 @@ var CartTable = function ($table, on_changd){
             console.log('<value_after_change> ' + value_after_change);
             var new_price = value_after_change * $row.data('price_per_item');
             $row.find('td.price').text(new_price);
-            __on_changed($row.data('id'), {price: new_price});
+            __on_changed($row.data('id'), $row.data('color'), {price: new_price, q:value_after_change });
         });
     };
 

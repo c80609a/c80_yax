@@ -23,9 +23,11 @@ var CartPage = function($cart_page) {
         e.preventDefault();
         _cart_table.clear();
         coo.cart_clean();
+        _calc_result_price();
     };
-    var _on_row_changed = function(row_id, obj_with_new_values) {
-        coo.cart_update_row(row_id, obj_with_new_values);
+    var _on_row_changed = function(row_id, color, obj_with_new_values) {
+        console.log('<_on_row_changed>');
+        coo.cart_update_row(row_id, color, obj_with_new_values);
         _calc_result_price();
     }
     var _fInitBehaviour = function (){

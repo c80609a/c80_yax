@@ -7,9 +7,9 @@ var ItemQuantityPicker = function (wrapper){
     var _cur_val;
     var __callbacks;
 
-    var _on_change = function(fun) {
+    var _on_change = function(func) {
         if (__callbacks === null) return;
-        __callbacks.push(fun);
+        __callbacks.push(func);
     };
 
     var _call_on_change = function() {
@@ -23,8 +23,14 @@ var ItemQuantityPicker = function (wrapper){
     };
 
     var _set_cur_val = function (new_val){
-        _cur_val = (new_val === 0) ? 1:new_val;
-        _call_on_change();
+        if (new_val !== _cur_val) {
+            if (new_val === 0) {
+                _cur_val = 1;
+            } else {
+                _cur_val = new_val;
+                _call_on_change();
+            }
+        }
     };
 
     var _get_cur_val = function() {
