@@ -12,6 +12,7 @@ var CollectDataForRow = function(item_id) {
         var price = q * price_per_item;
         var title = $item_show.data('title');
         var color = ITEM_COLOR_SELECTOR[item_id].get_cur_val();
+        var color_title = ITEM_COLOR_SELECTOR[item_id].get_cur_val(true);
         var options = ITEM_OPTIONS[item_id].get_cur_val();
 
         return {
@@ -19,6 +20,7 @@ var CollectDataForRow = function(item_id) {
             title: title,
             q: q,
             color: color,
+            color_title: color_title,
             price: price,
             price_per_item: price_per_item,
             image_url: $item_show.data('image_url'),

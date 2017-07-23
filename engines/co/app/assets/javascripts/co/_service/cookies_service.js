@@ -56,7 +56,7 @@ var CookiesService = function() {
             for (var i = 0; i < ids.length; i++) {
                 existent_row = cart[ids[i]];
                 // если цвет совпал - это товар того же цвета - мержим его
-                console.log(existent_row['color']+'----'+row_as_hash['color']);
+                // console.log(existent_row['color']+'----'+row_as_hash['color']);
                 if (existent_row['color'] === row_as_hash['color']) {
                     var old_price = existent_row['price'];
                     var old_quantity = existent_row['q'];
@@ -85,7 +85,7 @@ var CookiesService = function() {
     }
 
     this.cart_clean = function() {
-        console.log('<cart_clean>');
+        // console.log('<cart_clean>');
         var cart = _read_cookie('cart3');
         if (cart === null) return;
         cart = [];
@@ -93,12 +93,12 @@ var CookiesService = function() {
     };
 
     this.cart_update_row = function(row_id, color, obj_with_new_values) {
-        console.log('<cart_update_row>');
+        // console.log('<cart_update_row> row_id: ' + row_id + "; color: " + color);
         var cart = _read_cookie('cart3');
         for (var i = 0, row; i < cart.length; i++) {
             row = cart[i];
-            if (row['id'] != row_id) continue;
-            if (row['color'] != color) continue;
+            if (row['id'] !== row_id) continue;
+            if (row['color'] !== color) continue;
             for (var key in obj_with_new_values) {
                 row[key] = obj_with_new_values[key];
             }

@@ -7,9 +7,11 @@ setTimeout(function () {
         $cc.html(html_str);
 
         // перед показом можно переопределить надпись на кнопке
-        if ($cc.data('button-label') != undefined) {
+        /*if ($cc.data('button-label') != undefined) {
             $cc.find('[type=submit]').attr('value', $cc.data('button-label'));
-        }
+        }*/
+
+        aCartPage.print_table_to_comment();
 
     },500);
 },1000);

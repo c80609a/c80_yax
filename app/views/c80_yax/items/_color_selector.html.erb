@@ -2,8 +2,8 @@
   <li class="caption">Цвет: </li>
   <% colors.each do |color| %>
       <% style = "style='background-color: #{color.value}'".html_safe %>
-      <% data = "data-color='#{color.value}'".html_safe %>
+      <% data = "data-color='#{color.value}' data-color_title='#{color.title}'".html_safe %>
       <% klass = "class='c c_#{color.id}'".html_safe %>
-      <li <%=style%> <%=klass%> <%=data%></li>
+      <li title="<%= color.title %>" <%=style%> <%=klass%> <%=data%>></li>
   <% end %>
 </ul>
