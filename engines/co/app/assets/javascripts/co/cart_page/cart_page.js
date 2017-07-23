@@ -5,6 +5,7 @@ var CartPage = function($cart_page) {
     var _cart_table;
     var _$clear_btn;
     var _$result_price_val;
+    var _$delivery_checkbox;
     var _support;
 
     var _fill_table = function() {
@@ -19,6 +20,10 @@ var CartPage = function($cart_page) {
         for (var i = 0; i < cart.length; i++) {
             res += _support.print_row(cart[i]);
         }
+        res += _support.print_bottom_row({
+            order_price: _$result_price_val.text(),
+            deliver: _$delivery_checkbox[0].checked ? 'да':'нет'
+        });
         res = "<table border='1' cellpadding='0' cellspacing='0'>" + res + "</table>";
         return res;
     };
@@ -59,6 +64,7 @@ var CartPage = function($cart_page) {
         _cart_table = new CartTable(_$cart_page.find('table.cart_table'), _on_row_changed);
         _$clear_btn = $cart_page.find('.clear_btn');
         _$result_price_val = $cart_page.find('.bottom_row .result .val');
+        _$delivery_checkbox = $cart_page.find('.bottom_row div.checkbox input');
         _support = new RowPrinter();
         _fInitBehaviour();
     };

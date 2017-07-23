@@ -17,7 +17,10 @@ var RowPrinter = function() {
         '<td style="width:190px;">Цена: {{ price }}</td>' +
         '</tr>';
 
-    var _BOTTOM_ROW = '<tr></tr>';
+    var _BOTTOM_ROW = '<tr>' +
+            '<td colspan="2">Итого: {{ order_price }}</td>' +
+            '<td colspan="2">Доставка: {{ deliver }}</td>' +
+        '</tr>';
 
     var _print = function(obj, pattern) {
         var res = pattern;
