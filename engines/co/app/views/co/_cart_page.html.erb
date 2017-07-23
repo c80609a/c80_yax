@@ -32,10 +32,8 @@
       <%= link_to 'Очистить корзину', '#', class: 'clear_btn' %>
     </div>
   </div>
-  <%= render_image_link_lazy({
-                                 :alt_image => 'Корзина демо',
-                                 :image => image_url('demo_cart.jpg'),
-                                 :a_href => '#',
-                                 :a_rel => 'nofollow'
-                             }) %>
+  <div class="card_row">
+    <div id="cart_form_container"></div>
+    <div id="policy"><%= page_content %></div>
+  </div>
 </div>

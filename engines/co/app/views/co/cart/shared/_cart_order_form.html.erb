@@ -1,0 +1,83 @@
+<%= render_ok_message %>
+<div id="cart_order_form" tabindex="-1" role="dialog" aria-labelledby="feedbackForm" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title medium" id="myModalLabel">&nbsp;</h4>
+      </div>
+      <div class="modal-body regular">
+
+        <%= form_for :mess,
+                     :url => '/give_me_cart_order_form',
+                     :remote => true,
+                     html: {
+                             multipart: true,
+                             :role => :form,
+                             :id => "form_feedback",
+                             :data => {
+                                     :model => 'mess'
+                             }
+                     } do |f| %>
+
+            <div class="form-group clearfix">
+              <%= f.label :name, 'Фамилия Имя Отчество', class: 'control-label must' %>
+              <div class="input_wrapper"><%= f.text_field :name, class: 'form-control' %></div>
+              <span class="help-block col-md-12"></span>
+            </div>
+
+            <div class="form-group clearfix">
+              <%= f.label :phone, 'Контактный телефон', class: 'control-label must' %>
+              <div class="input_wrapper"><%= f.text_field :phone, class: 'form-control' %></div>
+              <span class="help-block col-md-12"></span>
+            </div>
+
+            <div class="form-group clearfix">
+              <%= f.label :date, 'Желаемая дата получения товара', class: 'control-label' %>
+              <div class="input_wrapper"><%= f.text_field :date, class: 'form-control' %></div>
+              <span class="help-block col-md-12"></span>
+            </div>
+
+            <div class="form-group clearfix">
+              <%= f.label :city, 'Населённый пункт', class: 'control-label' %>
+              <div class="input_wrapper"><%= f.text_field :city, class: 'form-control' %></div>
+              <span class="help-block col-md-12"></span>
+            </div>
+
+            <div class="form-group clearfix hiddn" style="margin-bottom: 0;">
+              <%= f.label :comment, 'Сообщение', class: 'control-label' %>
+              <div class="input_wrapper"><%= f.text_area :comment, class: 'form-control', :rows => '1' %></div>
+              <span class="help-block col-md-12"></span>
+            </div>
+
+            <div class="actions clearfix">
+              <%= f.label ' ', class: 'control-label' %>
+              <%= f.submit 'Отправить',
+                           class: 'btn btn-primary',
+                           data: {
+                                   disable_with: 'Отправляется...'
+                           }
+              %>
+            </div>
+
+        <% end %>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%# настраиваем форму %>
+<script>
+    $(document).ready(function () {
+
+        var $form = $("form#form_feedback");
+
+        $form.bind("ajax:error", function (event, data, status, xhr) {
+            $form.render_form_errors($.parseJSON(data.responseText));
+        });
+
+        $form.modal_success();
+
+    });
+</script>
