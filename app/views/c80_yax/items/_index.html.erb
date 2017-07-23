@@ -1,6 +1,9 @@
 <ul class="item_index">
   <% items.each do |item| %>
-      <li class="li_item i_<%= item.id%>">
+      <li class="li_item i_<%= item.id%>"
+          data-item_url="<%= item.my_url %>"
+          data-title="<%= item.title %>"
+          data-image_url="<%= item.fetch_first_photo('thumb_md') %>">
         <%= item.main_image(thumb_size) %>
         <%= item.h3_title(thumb_size) %>
         <%= item.div_prices %>

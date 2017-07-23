@@ -110,7 +110,10 @@ module C80Yax
     end
 
     def btn_order
-      h.link_to '', '#', class: 'add_to_bucket_sm'
+      h.link_to '',
+                '#',
+                class: "add_to_bucket_sm add_to_bucket_sm_#{model.id}",
+                data: { id: model.id }
     end
 
 
