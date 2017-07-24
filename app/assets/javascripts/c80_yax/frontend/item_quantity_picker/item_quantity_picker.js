@@ -5,9 +5,32 @@ var ItemQuantityPicker = function (wrapper){
     var _$wrapper;
     var _$less, _$great, _$input;
     var _cur_val;
+    var __callbacks;
+
+    var _on_change = function(func) {
+        if (__callbacks === null) return;
+        __callbacks.push(func);
+    };
+
+    var _call_on_change = function() {
+        if (__callbacks === null) return;
+
+        for (var i = 0; i < __callbacks.length; i++) {
+            if (__callbacks[i] !== undefined) {
+                __callbacks[i](_get_cur_val());
+            }
+        }
+    };
 
     var _set_cur_val = function (new_val){
-        _cur_val = (new_val === 0) ? 1:new_val;
+        if (new_val !== _cur_val) {
+            if (new_val === 0) {
+                _cur_val = 1;
+            } else {
+                _cur_val = new_val;
+                _call_on_change();
+            }
+        }
     };
 
     var _get_cur_val = function() {
@@ -49,6 +72,7 @@ var ItemQuantityPicker = function (wrapper){
         _$great = _$wrapper.find('a.g');
         _$input = _$wrapper.find('input');
         _cur_val = _$input.val();
+        __callbacks = [];
 
         _fInitBehaviour();
 
@@ -57,7 +81,8 @@ var ItemQuantityPicker = function (wrapper){
     _fInit(wrapper);
 
     return {
-        get_cur_val: _get_cur_val
+        get_cur_val: _get_cur_val,
+        on_change: _on_change
     }
 
 };

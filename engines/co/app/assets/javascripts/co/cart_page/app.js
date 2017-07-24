@@ -1,8 +1,9 @@
 var $cart_page;
+var aCartPage;
 
 $(document).ready(function() {
     $cart_page = $('div#cart_page');
     if ($cart_page.length !== 0) {
-        new CartPage($cart_page);
+        aCartPage = new CartPage($cart_page);
     }
 });

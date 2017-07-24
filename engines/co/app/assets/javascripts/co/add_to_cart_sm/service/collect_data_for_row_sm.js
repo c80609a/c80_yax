@@ -1,19 +1,19 @@
-// собирает данные с формы просмотра/заказа товара, на основе которых
-// создастся row to cart
+// собирает данные для строки после
+// нажатия мелкой кнопки "в корзину"
 
-var CollectDataForRow = function(item_id) {
+var CollectDataForRowSm = function(item_id) {
     this.call = function() {
-        console.log("<CollectDataForRow.call> item_id = " + item_id);
+        console.log("<CollectDataForRowSm.call> item_id = " + item_id);
 
-        var $item_show = $('.item_show_'+item_id);
+        var $item_show = $('.li_item.i_'+item_id);
 
-        var q = ITEM_QUANTITY_PICKERS[item_id].get_cur_val();
+        var q = 1;
         var price_per_item = Number($item_show.find('.price_props p.cur span.pvalue').text().split(',').join('.'));
         var price = q * price_per_item;
         var title = $item_show.data('title');
-        var color = ITEM_COLOR_SELECTOR[item_id].get_cur_val();
-        var color_title = ITEM_COLOR_SELECTOR[item_id].get_cur_val(true);
-        var options = ITEM_OPTIONS[item_id].get_cur_val();
+        var color = '';
+        var color_title = 'не указан';
+        var options = {delivery:false, super_colors:false, metallic:false};
 
         return {
             id: item_id,

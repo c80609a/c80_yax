@@ -6,7 +6,7 @@ module Of
       if defined?(ActiveAdmin)
         ActiveAdmin.application.load_paths += Dir["#{config.root}/app/models/**/"]
         #ActiveAdmin.application.load_paths += Dir["#{config.root}/app/models/concerns/**/"]
-        ActiveAdmin.application.load_paths += Dir["#{config.root}/app/admin/ti/**/"]
+        ActiveAdmin.application.load_paths += Dir["#{config.root}/app/admin/**/"]
         # ActiveAdmin.application.load_paths += Dir["#{config.root}/app/jobs/**/"]
       end
     end

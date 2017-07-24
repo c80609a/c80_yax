@@ -1,6 +1,6 @@
 "use strict";
 
-var ButtonAddToCart = function(selector) {
+var ButtonAddToCartSm = function(selector) {
 
     var _$btn;
     var _item_id;
@@ -8,11 +8,11 @@ var ButtonAddToCart = function(selector) {
     var _onClickBtn = function(e) {
         console.log('<_onClickBtn>');
         e.preventDefault();
-        var c = new AddRowToCart(_item_id).call();
+        var c = new AddRowToCartSm(_item_id).call();
         if (c.result) {
             // com.showDouble(c.message);
-            ButtonGotoCart.refresh_count();
             com.showDouble('Продолжить покупки?');
+            ButtonGotoCart.refresh_count();
         }
     };
 
@@ -22,7 +22,7 @@ var ButtonAddToCart = function(selector) {
     };
 
     /**
-     * selector = "add_to_bucket_#{item.id}"
+     * selector = "add_to_bucket_sm_#{item.id}"
      * @param selector
      */
     var _fInit = function (selector){
