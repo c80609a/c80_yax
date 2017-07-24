@@ -107,4 +107,18 @@ var CookiesService = function() {
         _create_cookie('cart3', cart, 256);
     }
 
+    this.cart_remove_row = function(row_id, color) {
+        var cart = _read_cookie('cart3');
+        for (var i = 0, row; i < cart.length; i++) {
+            row = cart[i];
+            if (row['id'] !== row_id) continue;
+            if (row['color'] !== color) continue;
+            console.log('<cart_remove_row> id: ' + row_id + ", color: " + color);
+            cart.splice(i,1);
+            _create_cookie('cart3', cart, 256);
+            return true;
+        }
+        return false;
+    }
+
 };

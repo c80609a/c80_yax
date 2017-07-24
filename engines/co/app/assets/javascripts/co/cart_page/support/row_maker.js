@@ -22,7 +22,7 @@ var RowMaker = function() {
             '</div>' +
         '</td>' +
         '<td class="price">{{ price }}</td>' +
-        '<td class="actions"><a title="Удалить" class="del_action" data-id="{{ id }}">Удалить</a></td>' +
+        '<td class="actions"><a title="Удалить" class="del_action" data-id="{{ id }}" data-color="{{ color }}">Удалить</a></td>' +
         '</tr>';
 
     this.make_row_htmlstr = function(obj) {

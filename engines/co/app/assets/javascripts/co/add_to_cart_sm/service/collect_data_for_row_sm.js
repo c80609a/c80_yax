@@ -11,7 +11,7 @@ var CollectDataForRowSm = function(item_id) {
         var price_per_item = Number($item_show.find('.price_props p.cur span.pvalue').text().split(',').join('.'));
         var price = q * price_per_item;
         var title = $item_show.data('title');
-        var color = '#ffffff';
+        var color = '';
         var color_title = 'не указан';
         var options = {delivery:false, super_colors:false, metallic:false};
 
