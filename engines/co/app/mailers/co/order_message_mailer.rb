@@ -20,7 +20,7 @@ module Co
     def format_message(message)
       result = "<br> • Имя: #{message.name}"
       result += "<br> • Телефон: #{message.phone}"
-      result += "<br> • Город: #{message.city}"
+      result += "<br> • Адрес: #{message.city}"
       result += "<br> • Детали заказа:<br><br> #{message.comment}"
       result
     end
