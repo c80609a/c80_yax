@@ -30,6 +30,12 @@ module C80Yax
                       .includes(strsubcat: :cats)
                       .where(c80_yax_cats: {slug: params[:slug] })
                       .paginate(page: @params[:page], per_page: @params[:per_page])
+        when 'strsubcat'
+          @itms = C80Yax::Item.includes(item_props: {prop_name: [:uom, :related]})
+                      .includes(:iphotos)
+                      .includes(:strsubcat)
+                      .where(c80_yax_strsubcats: {slug: params[:slug] })
+                      .paginate(page: @params[:page], per_page: @params[:per_page])
       end
 
       @items = ItemDecorator.decorate_collection(@itms)
