@@ -1,7 +1,7 @@
 "use strict";
 
 /*
- * <div class="container-fluid hits_widget more_items_list" data-type='hit|offer'>
+ * <div class="container-fluid hits_widget more_items_list" data-type='hit|offer|cat|strsubcat' data-slug="cat_slug|strsubcat_slug">
  *      <div class="container">
  *           <h2 class="yield_h2">Хиты продаж</h2>
  *           <div class="ajax_div">
@@ -64,18 +64,29 @@ var MoreItemsList = function (wrapper) {
         e.preventDefault();
         var $t = $(e.target);
         var t = _$wrapper.data('type');
+        var slug = _$wrapper.data('slug');
         var p = $t.attr('href').split('page=')[1];
-        console.log('<_fOnClickNext> type: ' + t + '; page: ' + p);
+        p = p.split('&')[0];
+        // /fetch_items?_=1500959360965&ajax_items_div=.container-fluid.more_items_list+.ajax_div&page=3&per_page=16&slug=bezopasnost-krovli&type=cat
+        // console.log('<_fOnClickNext> type: ' + t + '; page: ' + p);
+
+        var dat = {
+            type: t,
+            page: p,
+            slug: slug,
+            ajax_items_div: "." + _$wrapper.attr('class').split(' ').join('.') + " .ajax_div"
+        };
+
+        //noinspection EqualityComparisonWithCoercionJS
+        if (_$wrapper.data('per_page') != undefined) {
+            dat['per_page'] = _$wrapper.data('per_page');
+        }
 
         loading.show($t);
 
         $.ajax({
             url: "/fetch_items",
-            data: {
-                type: t,
-                page: p,
-                ajax_items_div: "." + _$wrapper.attr('class').split(' ').join('.') + " .ajax_div"
-            },
+            data: dat,
             dataType: "script",
             type: 'GET'
         }).done(function() {
@@ -88,7 +99,7 @@ var MoreItemsList = function (wrapper) {
 
         // находим в нем next кнопку will paginate
         _$next_btn = _$wrapper.find('a.next_page');
-        console.log('<_fSetNextPageBehaviour> ');
+        // console.log('<_fSetNextPageBehaviour> ');
 
         if (_$next_btn.data('processed')) {
 
