@@ -14,6 +14,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
                 :is_main,
                 :is_gift,
                 :is_starting,
+                :is_ask_price,
                 :is_available,
                 :strsubcat_id,
                 :iphotos_attributes => [:id, :image, :_destroy],
@@ -44,6 +45,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
 
     column :title
     column :strsubcat
+    column :is_ask_price
     column :is_hit
     column :is_sale
     column :is_main
@@ -81,6 +83,7 @@ ActiveAdmin.register C80Yax::Item, as: 'Item' do
       f.input :is_sale
       f.input :is_main
       f.input :is_gift
+      f.input :is_ask_price
       f.input :is_starting
       f.input :is_available
 

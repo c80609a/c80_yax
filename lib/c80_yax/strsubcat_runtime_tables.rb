@@ -551,6 +551,11 @@ class StrsubcatRuntimeTables
         item_id = item_prop[3]
         is_ask_price = item_prop[14]
 
+        # пригодится, если is_ask_price.to_i == 1
+        # is_price = PropName.find(prop_name_id).is_normal_price # не подходит, т.к. нужна только "цена за шт"
+        is_price = Proc.new { |pid|
+          C80Yax::PropName.find(pid).is_normal_price
+        }.call(prop_name_id)
 
         # <editor-fold desc="# производим магические манипуляции с Производителем">
         # если это свойство "бренд" -
@@ -596,7 +601,7 @@ class StrsubcatRuntimeTables
 
         # кэшируем первый раз
         unless hash_sql[item_id].present?
-          # Rails.logger.debug "\t new hash"
+         # Rails.logger.debug "\t new hash"
           hash_sql[item_id] = {
               prop_names_ids: %w'item_id item_title is_main is_hit is_sale strsubcat_id strsubcat_slug vendor_id full_desc image is_ask_price is_gift is_starting is_available',
               values: [item_id,item_prop[4],item_prop[5],item_prop[6],item_prop[7],item_prop[8],item_prop[9],vendor_id,item_prop[12],item_prop[13], is_ask_price, item_prop[15], item_prop[16], item_prop[17]],
