@@ -76,7 +76,7 @@ var CookiesService = function() {
         }
         
         _create_cookie('cart3', cart, 256);
-        console.log('<CookiesService.cart_push>');
+        // console.log('<CookiesService.cart_push>');
     };
 
     this.cart_get = function() {
@@ -113,7 +113,7 @@ var CookiesService = function() {
             row = cart[i];
             if (row['id'] !== row_id) continue;
             if (row['color'] !== color) continue;
-            console.log('<cart_remove_row> id: ' + row_id + ", color: " + color);
+            // console.log('<cart_remove_row> id: ' + row_id + ", color: " + color);
             cart.splice(i,1);
             _create_cookie('cart3', cart, 256);
             return true;

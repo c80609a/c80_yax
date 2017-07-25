@@ -38,14 +38,14 @@ var ItemQuantityPicker = function (wrapper){
     };
 
     var _onClickLess = function(e) {
-        console.log('<_onClickLess>');
+        // console.log('<_onClickLess>');
         _set_cur_val(_cur_val - 1);
         _afterClick();
         e.preventDefault();
     };
 
     var _onClickGreat = function(e) {
-        console.log('<_onClickGreat>');
+        // console.log('<_onClickGreat>');
         _set_cur_val(Number(_cur_val) + 1);
         _afterClick();
         e.preventDefault();
@@ -56,7 +56,7 @@ var ItemQuantityPicker = function (wrapper){
     };
 
     var _onChangeInput = function(e) {
-        console.log('<_onChangeInput>');
+        // console.log('<_onChangeInput>');
     };
 
     var _fInitBehaviour = function (){

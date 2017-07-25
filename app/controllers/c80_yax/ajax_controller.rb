@@ -3,7 +3,13 @@ module C80Yax
 
     def fetch_items
 
-      @params = _make_params   # params: {type:'hit', ajax_items: '.div_hot_items .ajax_items', page: 1, per_page: 4}
+      @params = _make_params
+      # params: {
+      # type:'hit',
+      # ajax_items: '.div_hot_items .ajax_items',
+      # page: 1,
+      # per_page: 4
+      # slug: ...
 
       case @params[:type]
         when 'hit'
@@ -18,6 +24,12 @@ module C80Yax
                      .includes(:iphotos)
                      .includes(:strsubcat)
                      .paginate(page: @params[:page], per_page: @params[:per_page])
+        when 'cat'
+          @itms = C80Yax::Item.includes(item_props: {prop_name: [:uom, :related]})
+                      .includes(:iphotos)
+                      .includes(strsubcat: :cats)
+                      .where(c80_yax_cats: {slug: params[:slug] })
+                      .paginate(page: @params[:page], per_page: @params[:per_page])
       end
 
       @items = ItemDecorator.decorate_collection(@itms)

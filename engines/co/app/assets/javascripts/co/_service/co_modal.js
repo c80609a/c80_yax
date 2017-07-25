@@ -25,7 +25,7 @@ var CoModal = function() {
 
     // _double_modal.html.erb
     this.showDouble = function(message) {
-        console.log('<showDouble> message: ' + message);
+        // console.log('<showDouble> message: ' + message);
         var $modal = _init_modal('double');
         $modal.find('.modal-body').text(message);
         $modal.find('.btn_close').on('click', function(e) {

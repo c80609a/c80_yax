@@ -19,7 +19,7 @@ var ButtonGotoCart = function(selector) {
     //</editor-fold>
 
     this.set_count = function(new_val) {
-        console.log('<ButtonGotoCart#set_count>');
+        // console.log('<ButtonGotoCart#set_count>');
         _$counter.text(new_val);
     }
 
@@ -27,7 +27,7 @@ var ButtonGotoCart = function(selector) {
 
 ButtonGotoCart.instances = [];
 ButtonGotoCart.refresh_count = function() {
-    console.log('<ButtonGotoCart.refresh_count>');
+    // console.log('<ButtonGotoCart.refresh_count>');
     var cart = coo.cart_get();
     var new_val = 0;
     for (var i = 0; i < cart.length; i++) {

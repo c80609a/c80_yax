@@ -29,7 +29,7 @@ var CartPage = function($cart_page) {
     };
     var _print_table_to_comment = function() {
         var ss = _print_table();
-        console.log(ss);
+        // console.log(ss);
         $cc.find('#mess_comment').val(ss);
     }
     var _calc_result_price = function() {
@@ -49,7 +49,7 @@ var CartPage = function($cart_page) {
         ButtonGotoCart.refresh_count();
     };
     var _on_row_changed = function(row_id, color, obj_with_new_values) {
-        console.log('<_on_row_changed>');
+        // console.log('<_on_row_changed>');
         coo.cart_update_row(row_id, color, obj_with_new_values);
         _calc_result_price();
         _print_table_to_comment();

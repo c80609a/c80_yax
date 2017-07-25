@@ -3,7 +3,7 @@
 
 var CollectDataForRow = function(item_id) {
     this.call = function() {
-        console.log("<CollectDataForRow.call> item_id = " + item_id);
+        // console.log("<CollectDataForRow.call> item_id = " + item_id);
 
         var $item_show = $('.item_show_'+item_id);
 

@@ -40,7 +40,7 @@ var CartTable = function ($table, on_changd){
         _$tbody.append($row);
         $row.find('.del_action').on('click', _on_click_delete_row);
         _activate_q_picker(function(value_after_change) {
-            console.log('<value_after_change> ' + value_after_change);
+            // console.log('<value_after_change> ' + value_after_change);
             var new_price = value_after_change * $row.data('price_per_item');
             $row.find('td.price').text(new_price);
             __on_changed($row.data('id'), $row.data('color'), {price: new_price, q:value_after_change });

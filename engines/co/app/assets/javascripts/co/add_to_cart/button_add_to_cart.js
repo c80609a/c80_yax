@@ -6,7 +6,7 @@ var ButtonAddToCart = function(selector) {
     var _item_id;
 
     var _onClickBtn = function(e) {
-        console.log('<_onClickBtn>');
+        // console.log('<_onClickBtn>');
         e.preventDefault();
         var c = new AddRowToCart(_item_id).call();
         if (c.result) {

@@ -3,7 +3,7 @@
 
 var CollectDataForRowSm = function(item_id) {
     this.call = function() {
-        console.log("<CollectDataForRowSm.call> item_id = " + item_id);
+        // console.log("<CollectDataForRowSm.call> item_id = " + item_id);
 
         var $item_show = $('.li_item.i_'+item_id);
 

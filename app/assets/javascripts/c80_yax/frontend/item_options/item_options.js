@@ -18,9 +18,9 @@ var ItemOptions = function (wrapper){
             var $inp = $t.find('input');
             var val = $inp[0].checked;
             _cur_val[tag] = val;
-            console.log('<_fCollectOptions> val = ' + val + ": " + tag);
+            // console.log('<_fCollectOptions> val = ' + val + ": " + tag);
         });
-        console.log(_cur_val);
+        // console.log(_cur_val);
     }
 
     var _fInitBehaviour = function (){
