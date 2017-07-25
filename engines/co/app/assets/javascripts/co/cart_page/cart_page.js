@@ -41,12 +41,15 @@ var CartPage = function($cart_page) {
         _$result_price_val.text(result);
     };
     var _on_click_clear = function(e) {
-        e.preventDefault();
+        if (e != undefined) e.preventDefault();
         _cart_table.clear();
         coo.cart_clean();
         _calc_result_price();
         _print_table_to_comment();
         ButtonGotoCart.refresh_count();
+    };
+    var _reset = function() {
+        _on_click_clear();
     };
     var _on_row_changed = function(row_id, color, obj_with_new_values) {
         // console.log('<_on_row_changed>');
@@ -72,6 +75,7 @@ var CartPage = function($cart_page) {
     };
     _fInit($cart_page);
     return {
-        print_table_to_comment: _print_table_to_comment
+        print_table_to_comment: _print_table_to_comment,
+        reset: _reset
     }
 };
