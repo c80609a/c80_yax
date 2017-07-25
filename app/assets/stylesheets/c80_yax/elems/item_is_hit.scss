@@ -1,0 +1,13 @@
+.is_hit_true {
+  position: relative;
+  &:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    width: 40px;
+    height: 100px;
+    background: transparent image_url('c80_yax/item_hit.png') no-repeat 0 0;
+  }
+}
