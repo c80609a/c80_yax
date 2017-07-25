@@ -71,20 +71,6 @@ div.card_row {
 
             .input_wrapper {
 
-              position: relative;
-
-              &:after {
-                content: "";
-                background: transparent url(image_path('stripe.png')) repeat 0 0; /*NOTE:: можно переопределить в custom классах */
-                opacity: 0.1;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                position: absolute;
-                z-index: 0;
-              }
-
               .form-control {
                 position: relative;
                 z-index: 1;
@@ -126,7 +112,7 @@ div.card_row {
             margin-top: 15px;
 
             input.btn {
-              @include color_button(#FFFFFF, $red);
+
             }
 
           }
