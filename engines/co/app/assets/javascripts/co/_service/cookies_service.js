@@ -81,6 +81,7 @@ var CookiesService = function() {
 
     this.cart_get = function() {
         var cart = _read_cookie('cart3');
+        if (cart === null) cart = [];
         return cart;
     }
 
@@ -95,6 +96,7 @@ var CookiesService = function() {
     this.cart_update_row = function(row_id, color, obj_with_new_values) {
         // console.log('<cart_update_row> row_id: ' + row_id + "; color: " + color);
         var cart = _read_cookie('cart3');
+        if (cart === null) return;
         for (var i = 0, row; i < cart.length; i++) {
             row = cart[i];
             if (row['id'] !== row_id) continue;
@@ -109,6 +111,7 @@ var CookiesService = function() {
 
     this.cart_remove_row = function(row_id, color) {
         var cart = _read_cookie('cart3');
+        if (cart === null) return;
         for (var i = 0, row; i < cart.length; i++) {
             row = cart[i];
             if (row['id'] !== row_id) continue;
