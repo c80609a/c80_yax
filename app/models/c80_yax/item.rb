@@ -49,6 +49,12 @@ class C80Yax::Item < ActiveRecord::Base
                           join_table: 'of_items_offers',
                           association_foreign_key: 'item_id'
 
+  has_and_belongs_to_many :offers,
+                          class_name: 'Ti::Doc',
+                          foreign_key: 'doc_id',
+                          join_table: 'ti_docs_items',
+                          association_foreign_key: 'item_id'
+
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged
 

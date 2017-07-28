@@ -1,4 +1,4 @@
-ActiveAdmin.register Ti::Doc, :as => 'Docs' do
+ActiveAdmin.register Ti::Doc, :as => 'Doc' do
 
   before_filter :skip_sidebar!, :only => :index
 
@@ -9,6 +9,7 @@ ActiveAdmin.register Ti::Doc, :as => 'Docs' do
   permit_params :title,
                 :full,
                 :category_ids => [],
+                :item_ids => [],
                 :dphotos_attributes => [:id,:image,:_destroy]
 
   index do
@@ -59,6 +60,19 @@ ActiveAdmin.register Ti::Doc, :as => 'Docs' do
                        :hint => image_tag(dphoto.object.image.thumb_sm)
         end
       end
+
+      f.input :items,
+              :as => :select,
+              :input_html => {
+                  :title => '',
+                  :class => 'selectpicker',
+                  :data => {
+                      :size => 10,
+                      :width => '700px'
+                  },
+                  :multiple => true
+              },
+              :include_blank => true
 
       f.input :full, :as => :ckeditor,
               :input_html => {:style => 'height:500px', rows: 20}
