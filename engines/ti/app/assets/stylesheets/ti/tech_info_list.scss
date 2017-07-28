@@ -2,6 +2,7 @@ ul.tech_info_list {
   margin: 0;
   padding: 0;
   list-style: none;
+  @extend %collapsed;
 
   h2 {
     text-transform: uppercase;
